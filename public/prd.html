@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PRD — Ufaq Khalid Portfolio</title>
+  <style>
+    @page { margin: 18mm 16mm; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: #1a1d24;
+      line-height: 1.55;
+      font-size: 11.5pt;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    h1 { font-size: 22pt; margin: 0 0 12pt; }
+    h2 { font-size: 15pt; margin: 22pt 0 8pt; border-bottom: 1px solid #d8dce3; padding-bottom: 4pt; }
+    h3 { font-size: 12.5pt; margin: 16pt 0 6pt; }
+    h4 { font-size: 11.5pt; margin: 12pt 0 4pt; }
+    p { margin: 0 0 8pt; }
+    ul { margin: 0 0 10pt; padding-left: 18pt; }
+    li { margin: 0 0 3pt; }
+    hr { border: none; border-top: 1px solid #d8dce3; margin: 16pt 0; }
+    code { font-family: Consolas, "Courier New", monospace; font-size: 0.92em; background: #f3f4f7; padding: 0 4px; }
+    a { color: #2457c5; }
+    table { border-collapse: collapse; width: 100%; margin: 0 0 14pt; font-size: 10.5pt; }
+    th, td { border: 1px solid #cfd4dc; padding: 6px 8px; text-align: left; vertical-align: top; }
+    th { background: #eef1f6; }
+    blockquote { margin: 0 0 12pt; padding: 8pt 12pt; background: #f6f7fa; border-left: 3px solid #6b9eff; }
+  </style>
+</head>
+<body>
+<h1>Product Requirements Document</h1>
+<p><strong>Product:</strong> Ufaq Khalid — Personal Portfolio Website  </p>
+<p><strong>Owner:</strong> Ufaq Khalid  </p>
+<p><strong>Document type:</strong> PRD (v1)  </p>
+<p><strong>Status:</strong> Implemented (current product)  </p>
+<p><strong>Last updated:</strong> 15 September 2026</p>
+<hr />
+<h2>1. Overview</h2>
+<p>This is <strong>Ufaq Khalid’s personal portfolio website</strong>: a fast, single-page site that presents who she is, what she can build, and how to reach her.</p>
+<p>A first-time visitor should immediately understand that she is a <strong>3rd year BSCS student</strong> who builds <strong>practical, functional web-based systems</strong>, and that she is <strong>open to real project work</strong> and growing as a developer.</p>
+<h3>Positioning</h3>
+<ul>
+<li><strong>Who:</strong> 3rd year BSCS student at University of Central Punjab (Gujranwala Campus), based in Gujranwala, Pakistan.</li>
+<li><strong>What she builds:</strong> Practical web-based systems (and related academic work: DBMS apps, DSA-based game logic, requirement engineering).</li>
+<li><strong>Primary ask:</strong> Project opportunities and junior developer work — <strong>not internships</strong>.</li>
+</ul>
+<h3>Outcome priorities</h3>
+<p>| Priority | Outcome |</p>
+<p>| --- | --- |</p>
+<p>| 1 | Junior developer / job opportunities |</p>
+<p>| 2 | Small freelance / “launch” clients and real-world project work |</p>
+<table><thead><tr><th>3</th><th>University project collaborators</th></tr></thead><tbody>
+</tbody></table>
+<p>The <strong>#1 visitor</strong> is a small business owner or someone with a web/software project who needs it built. Within ~30 seconds they should be able to answer: *“Can this person actually build what I need?”*</p>
+<hr />
+<h2>2. Goals</h2>
+<p>Over the next <strong>3–6 months</strong>, the site should:</p>
+<p>1. <strong>Showcase the three strongest academic projects</strong> so a visitor understands what Ufaq can build without extra explanation.</p>
+<p>2. <strong>Make contact effortless</strong> (email, phone, WhatsApp, and a simple form) when someone has a project or opportunity.</p>
+<p>3. <strong>Help start small freelance / real-world project opportunities</strong>, not internships.</p>
+<p>4. <strong>Build credibility as a developer</strong> despite no formal work experience yet.</p>
+<p><strong>Must-win:</strong> A visitor understands the three projects and skills, and can contact Ufaq in one click.</p>
+<hr />
+<h2>3. Target Audience</h2>
+<h3>Primary</h3>
+<p><strong>Small business owner or project owner</strong> who needs a web/software system built.</p>
+<p>They will look for:</p>
+<ul>
+<li>Real project examples</li>
+<li>Clear skills</li>
+<li>An easy way to get in touch</li>
+</ul>
+<h3>Secondary</h3>
+<ul>
+<li>Fellow students or developers reviewing the work</li>
+<li>University professors / academic reviewers evaluating project quality</li>
+<li>Formal recruiters (not the main focus; the site should still look credible if they visit)</li>
+</ul>
+<h3>Not the main audience</h3>
+<p>Internship-focused recruiters and internship-first messaging.</p>
+<hr />
+<h2>4. Site Content</h2>
+<p>Single-page site with in-page sections. English only.</p>
+<h3>4.1 Navbar</h3>
+<p>| Item | Requirement |</p>
+<p>| --- | --- |</p>
+<p>| Left | Name / wordmark: <strong>Ufaq Khalid</strong> |</p>
+<p>| Links (order) | Home · About · Skills · Projects · Contact |</p>
+<table><thead><tr><th>Right</th><th><strong>Resume</strong> control</th></tr></thead><tbody>
+<tr><td>Theme</td><td>Dark theme only — <strong>no</strong> theme toggle</td></tr>
+<tr><td>Social</td><td><strong>No</strong> social icons in the navbar (footer only)</td></tr>
+</tbody></table>
+<p><strong>Resume control (v1):</strong> Do <strong>not</strong> use a broken download link. Show a <strong>“Resume coming soon”</strong> state until a PDF is provided.</p>
+<h3>4.2 Hero</h3>
+<p><strong>Headline:</strong> I’m Ufaq Khalid.  </p>
+<p><strong>Supporting line:</strong> 3rd year BSCS student building practical, functional web-based systems.</p>
+<p><strong>Buttons:</strong></p>
+<ul>
+<li>Primary: <strong>View Projects</strong> (smooth-scroll to Projects)</li>
+<li>Secondary: <strong>Download Resume</strong> — same “coming soon” behavior until the PDF exists</li>
+</ul>
+<p><strong>Must-have facts (visible in hero, not as a photo):</strong></p>
+<ul>
+<li>3rd year BSCS student</li>
+<li>University of Central Punjab (Gujranwala Campus)</li>
+<li>CGPA <strong>3.45</strong></li>
+<li>Based in Gujranwala, Pakistan</li>
+<li>Open to project work</li>
+</ul>
+<p><strong>Photo:</strong> <strong>None.</strong> No headshot in the hero or anywhere else.</p>
+<h3>4.3 About</h3>
+<p>Short, simple, professional, easy to read — no fancy or complicated wording.</p>
+<p><strong>Story:</strong></p>
+<ul>
+<li>3rd year BSCS student at University of Central Punjab, Gujranwala</li>
+<li>Enjoys building practical web-based systems and learning through real projects</li>
+<li>Education (CGPA 3.45, 3rd year) mentioned <strong>briefly in copy</strong>, plus University / CGPA / Focus stat cards</li>
+</ul>
+<p><strong>Skills:</strong> Not inside About — dedicated Skills section.</p>
+<h3>4.4 Skills</h3>
+<p>Grouped tags/pills, <strong>glassmorphism</strong>, <strong>no icons</strong>.</p>
+<p>| Group | Items |</p>
+<p>| --- | --- |</p>
+<p>| Languages / Programming | C++, JavaScript |</p>
+<table><thead><tr><th>Web (Front-End)</th><th>HTML, CSS</th></tr></thead><tbody>
+<tr><td>Tools</td><td>XAMPP, Visual Studio</td></tr>
+<tr><td>Other</td><td>Requirement Engineering (SRS documentation, Use Case &amp; Sequence Diagrams)</td></tr>
+</tbody></table>
+<p>This is the full current skill set; nothing extra to list or hide.</p>
+<h3>4.5 Projects</h3>
+<p>Simple list of <strong>3</strong> projects. <strong>No filters.</strong> <strong>No separate project pages.</strong> Clicking a card <strong>expands more detail on the same page</strong>.</p>
+<p>Each card:</p>
+<ul>
+<li>Title</li>
+<li>Short description (2–3 sentences)</li>
+<li>Placeholder / generic image if no real screenshot yet</li>
+<li>Tech stack tags <strong>except</strong> for the documentation-only project</li>
+</ul>
+<p><strong>No GitHub or live demo links</strong> in v1 (academic projects).</p>
+<h4>Project 1 — Smart Campus Attendance &amp; Performance Analytics System</h4>
+<p>A web-based DBMS platform for universities to manage attendance, track performance, and generate reports.</p>
+<p><strong>Stack tags:</strong> MySQL, PHP, HTML, CSS, JavaScript</p>
+<h4>Project 2 — Dark Veil Odyssey</h4>
+<p>A game project built in Visual Studio applying data structures and algorithms (DSA) for game logic and interactivity.</p>
+<p><strong>Stack tags:</strong> Visual Studio, DSA (and related implementation details as available)</p>
+<h4>Project 3 — Online Training &amp; Certification System</h4>
+<p>A complete Software Requirement Specification (SRS) including Use Case and Sequence diagrams for a web-based training platform.</p>
+<p><strong>Important:</strong> Documentation-only — <strong>no code and no live demo</strong>. The card must state this clearly and <strong>must not</strong> show coded-project tech tags (PHP/HTML/etc.). Use documentation labels (e.g. SRS, Use Cases, Sequence Diagrams) only.</p>
+<h3>4.6 Contact</h3>
+<p><strong>Heading:</strong> Let’s Work on a Project</p>
+<p><strong>On-page details (always visible):</strong></p>
+<ul>
+<li>Email: <a href="mailto:ufaqkhalid1414@gmail.com">ufaqkhalid1414@gmail.com</a></li>
+<li>Phone: 0322-6037970 (<code>tel:+923226037970</code>)</li>
+<li><strong>WhatsApp:</strong> button/link using the same number so visitors can message directly (<code>https://wa.me/923226037970</code>)</li>
+</ul>
+<p><strong>Form fields:</strong> Name, Email, Message  </p>
+<p><strong>v1 submission:</strong> Working <strong><code>mailto:</code></strong> (pre-filled) until Formspree is configured.  </p>
+<p><strong>Later:</strong> Formspree forwarding to the email above — no data storage.</p>
+<p><strong>Success copy after submit (when a real form backend exists):</strong></p>
+<blockquote>
+<p>Thank you for reaching out! I really appreciate you taking the time to connect. I'll review your message and get back to you as soon as I can.</p>
+</blockquote>
+<p><strong>TBD (placeholders only):</strong> LinkedIn URL, GitHub profile URL.</p>
+<h3>4.7 Footer</h3>
+<p>Minimal:</p>
+<ul>
+<li>Name: Ufaq Khalid</li>
+<li>Tagline: <strong>BSCS Student &amp; Web Developer</strong> (or equivalent)</li>
+<li>Email again</li>
+<li>Copyright: <strong>© 2026</strong></li>
+<li>Social: GitHub / LinkedIn <strong>TBD</strong> (omit or disable until URLs exist)</li>
+</ul>
+<p><strong>Not in footer:</strong> Back-to-top, repeated full nav.</p>
+<hr />
+<h2>5. Functional Requirements</h2>
+<h3>Required</h3>
+<p>| ID | Requirement |</p>
+<p>| --- | --- |</p>
+<p>| FR-1 | Fully <strong>responsive</strong> layout: mobile, tablet, and desktop |</p>
+<p>| FR-2 | <strong>Smooth scroll</strong> between sections (nav + hero CTAs) via <code>scrollIntoView</code> (<code>scrollToHash</code> utility). Offset uses <code>scroll-margin-top</code> only — do <strong>not</strong> also set <code>html</code> <code>scroll-padding-top</code>, which stacked and overshot the heading |</p>
+<p>| FR-3 | <strong>Mobile hamburger</strong> menu for navigation |</p>
+<p>| FR-4 | Resume control that never 404s; PDF download when file exists, otherwise “coming soon” |</p>
+<p>| FR-5 | Contact form <strong>basic validation</strong> (name, email format, non-empty message) |</p>
+<p>| FR-6 | Email, phone, and <strong>WhatsApp</strong> actions work from Contact |</p>
+<p>| FR-7 | Project cards <strong>expand in place</strong> for extra detail |</p>
+<p>| FR-8 | Single static portfolio — <strong>no</strong> accounts, login, blog, or admin |</p>
+<h3>Nice-to-have</h3>
+<p>| ID | Requirement |</p>
+<p>| --- | --- |</p>
+<p>| NFR-UX-1 | Sticky nav <strong>highlights the current section</strong> while scrolling |</p>
+<p>| NFR-UX-2 | Light <strong>fade-in</strong> as sections enter the viewport |</p>
+<p>| NFR-UX-3 | Shared <strong><code>.card-hover</code></strong> glow (soft accent <code>box-shadow</code> only, 200ms ease) on About stats, Skills categories, Projects cards, Contact info pills, and Education card — no extra scale or border-color change on those boxes |</p>
+<hr />
+<h2>6. Non-Functional Requirements</h2>
+<p>| Area | Requirement |</p>
+<table><thead><tr><th>---</th><th>---</th></tr></thead><tbody>
+<tr><td>Accessibility (v1)</td><td>Readable <strong>contrast</strong> (body copy is a brighter muted gray, e.g. <code>#c8cad6</code> on <code>#0d1117</code>); <strong>keyboard-navigable</strong> nav and form. Advanced screen-reader work is not required now</td></tr>
+<tr><td>SEO</td><td>Page title and meta description, e.g. <strong>Ufaq Khalid — BSCS Student &amp; Web Developer Portfolio</strong></td></tr>
+<tr><td>Browsers</td><td>Latest <strong>Chrome, Edge, Firefox</strong>. No support for very old browsers</td></tr>
+<tr><td>Language</td><td>English only</td></tr>
+<tr><td>Hosting</td><td>Deploy on <strong>Vercel</strong>, connected to the GitHub repo, when the site is ready</td></tr>
+<tr><td>Contact privacy</td><td>No stored form database. v1: <code>mailto:</code>. Later: <strong>Formspree</strong> forwards to email</td></tr>
+<tr><td>Analytics</td><td><strong>Not required</strong> in v1</td></tr>
+</tbody></table>
+<hr />
+<h2>7. Visual / Design System</h2>
+<p>| Token | Direction |</p>
+<table><thead><tr><th>---</th><th>---</th></tr></thead><tbody>
+<tr><td>Background</td><td>Deep navy-black <strong><code>#0d1117</code></strong>; alternate sections use a slightly lighter shade (<strong><code>#10151c</code></strong>) so the page is not one flat block</td></tr>
+<tr><td>Cards</td><td><strong><code>#161b22</code></strong>, 1px low-opacity borders</td></tr>
+<tr><td>Accent</td><td><strong><code>#6b9eff</code></strong> — reserved for <strong>links, primary buttons, active nav, icons, and thin accent borders</strong>. Do not use it as decorative fill on labels/eyebrows</td></tr>
+<tr><td>Text</td><td>Headings near-white (<code>#f0f3f6</code>); body <strong>muted gray</strong> (<code>#c8cad6</code>) for contrast on navy</td></tr>
+<tr><td>Surfaces</td><td>Card surfaces with subtle borders and a shared hover glow (see <code>.card-hover</code>)</td></tr>
+<tr><td>Type</td><td><strong>Inter</strong> for body; <strong>Space Grotesk</strong> for headings (<code>h1</code>/<code>h2</code>/<code>h3</code>). Font CSS variables must be defined where Next.js <code>next/font</code> classes apply (on <code>body</code>, not only <code>:root</code>), or headings silently fall back to Times New Roman</td></tr>
+<tr><td>Layout</td><td>Single page, centered content, reasonable <strong>max-width</strong> (not edge-to-edge on large screens)</td></tr>
+<tr><td>Photo</td><td>None</td></tr>
+<tr><td>Vibe</td><td>Minimal, techy, clean — professional but not corporate-stiff</td></tr>
+</tbody></table>
+<p><strong>Do not use:</strong> neon colors, excessive motion, cluttered/busy layouts.</p>
+<p>Styling approach: global CSS (<code>src/index.css</code>) with design tokens as CSS variables. Hover on cards is <strong><code>.card-hover</code></strong> (<code>box-shadow: 0 0 20px</code> at 30% accent opacity, <code>200ms ease</code>).</p>
+<hr />
+<h2>8. Tech Stack</h2>
+<p>| Layer | Choice | Notes |</p>
+<p>| --- | --- | --- |</p>
+<p>| App | <strong>Next.js</strong> (App Router) | <code>src/app/layout.tsx</code> + <code>src/app/page.tsx</code>; not Vite or a static HTML/CSS/JS site |</p>
+<p>| UI | <strong>React</strong> | Single-page portfolio sections on <code>/</code> |</p>
+<p>| Language | <strong>TypeScript</strong> | |</p>
+<p>| CSS | Global CSS + CSS variables | <code>src/index.css</code> (not Tailwind) |</p>
+<p>| Fonts | <strong><code>next/font</code></strong> | Inter + Space Grotesk |</p>
+<p>| Motion | <strong>Framer Motion</strong> + CSS | Section/hero entrance; card hover is CSS-only |</p>
+<p>| In-page nav | <strong><code>scrollToHash</code></strong> | <code>src/lib/scrollToHash.ts</code> — <code>scrollIntoView({ block: 'start' })</code> so <code>scroll-margin-top</code> is honored |</p>
+<p>| Contact (later) | <strong>Formspree</strong> | After account + form ID exist |</p>
+<p>| Hosting | <strong>Vercel</strong> | Linked to GitHub |</p>
+<p>No extra product features that would require a backend, CMS, or auth. Dev: <code>npm run dev</code> → <strong>http://localhost:3000</strong>.</p>
+<hr />
+<h2>9. Outstanding Content Needed</h2>
+<h3>Still TBD (blockers for a “complete” live site)</h3>
+<p>| Item | v1 workaround |</p>
+<p>| --- | --- |</p>
+<table><thead><tr><th>Resume PDF</th><th>“Resume coming soon” — no broken link</th></tr></thead><tbody>
+<tr><td>Public GitHub profile URL</td><td>Omit or placeholder in footer</td></tr>
+<tr><td>Real screenshots for 3 projects</td><td>Generic / placeholder visuals</td></tr>
+<tr><td>Formspree form ID</td><td>Working <code>mailto:</code> until set up</td></tr>
+</tbody></table>
+<h3>Explicitly not needed</h3>
+<ul>
+<li>Headshot / photo assets — <strong>do not add a photo section</strong></li>
+</ul>
+<h3>Already known / ready to implement</h3>
+<ul>
+<li>Name, role, tagline, bio direction</li>
+<li>Education: BSCS, <strong>3rd year</strong>, UCP Gujranwala, CGPA 3.45</li>
+<li>Skills list and grouping</li>
+<li>All 3 project titles, descriptions, and stack/documentation treatment</li>
+<li>Email and phone (and WhatsApp from the same number)</li>
+<li>Design direction (colors, type, glassmorphism)</li>
+</ul>
+<hr />
+<h2>10. Success Metrics</h2>
+<p><strong>Timeframe:</strong> first 3–6 months. <strong>No visit analytics</strong> in v1.</p>
+<h3>Success looks like</h3>
+<ul>
+<li>A visitor understands the <strong>3 projects and skills</strong> without asking extra questions</li>
+<li>Contact is <strong>one click away</strong> (email, phone, WhatsApp visible — no digging)</li>
+<li>The site looks <strong>clean and professional on mobile and desktop</strong></li>
+<li>At least <strong>one real inquiry or small project opportunity</strong> from someone who found the site</li>
+</ul>
+<h3>Failure looks like</h3>
+<ul>
+<li>Broken or unfinished appearance on mobile</li>
+<li>Visitors cannot tell what the projects actually are</li>
+<li>People cannot figure out how to contact Ufaq easily</li>
+</ul>
+<hr />
+<h2>11. Out of Scope (v1)</h2>
+<p>Do <strong>not</strong> build in this version:</p>
+<ul>
+<li>Blog, CMS, extra marketing pages</li>
+<li>Accounts, login, admin, dashboards</li>
+<li>Light/dark <strong>theme toggle</strong></li>
+<li>Internship-first positioning or dedicated internship funnel</li>
+<li>GitHub / live demo links on project cards</li>
+<li>Separate project detail routes</li>
+<li>Project filters / search</li>
+<li>Headshot / photo</li>
+<li>Analytics / visit tracking</li>
+<li>Email automation beyond Formspree (later) or <code>mailto:</code> (now)</li>
+<li>Multilingual support</li>
+<li>Testimonials, client logos, or a services pricing page</li>
+<li>Advanced accessibility / screen-reader certification work</li>
+<li>Back-to-top control and repeated footer nav</li>
+<li>Extra animation libraries or heavy motion</li>
+</ul>
+<p><strong>WhatsApp is in scope</strong> (added after the first contact pass): a visible WhatsApp action using 0322-6037970.</p>
+<hr />
+<h2>Appendix A — Resolved decisions (interview)</h2>
+<p>| Topic | Decision |</p>
+<table><thead><tr><th>---</th><th>---</th></tr></thead><tbody>
+<tr><td>Photo in hero</td><td>Originally requested; <strong>final decision: no photo</strong></td></tr>
+<tr><td>WhatsApp</td><td>Originally deferred; <strong>final decision: include</strong></td></tr>
+<tr><td>Contact backend</td><td><code>mailto:</code> now; Formspree when ID exists</td></tr>
+<tr><td>Tech</td><td><strong>Next.js</strong> (App Router) + React + TypeScript + global CSS. Original interview said Vite/Tailwind; <strong>shipped stack is Next.js</strong>.</td></tr>
+<tr><td>Projects</td><td>3 cards, expand in place, placeholders OK</td></tr>
+<tr><td>SRS project</td><td>Documentation-only; call that out; no coded-stack tags</td></tr>
+<tr><td>Academic year</td><td><strong>3rd year BSCS student</strong> (not final-year)</td></tr>
+</tbody></table>
+<h2>Appendix B — Public contact (approved to publish)</h2>
+<ul>
+<li><strong>Email:</strong> ufaqkhalid1414@gmail.com  </li>
+<li><strong>Phone:</strong> 0322-6037970  </li>
+<li><strong>WhatsApp:</strong> https://wa.me/923226037970  </li>
+<li><strong>Location:</strong> Gujranwala, Pakistan  </li>
+</ul>
+<hr />
+<h2>12. Changelog</h2>
+<h3>15 September 2026</h3>
+<ul>
+<li><strong>Stack:</strong> Portfolio runs on <strong>Next.js</strong> (App Router), not Vite and not plain HTML/CSS/JS.</li>
+<li><strong>Hover:</strong> Shared <strong><code>.card-hover</code></strong> / <code>GlassCard</code> hover — identical soft accent glow on About stats (University, CGPA, Focus), Skills category cards, Projects cards, Contact info boxes (email, phone, location), and Education.</li>
+<li><strong>Typography:</strong> Display font (Space Grotesk) was falling back to Times New Roman because <code>--font-space</code> from <code>next/font</code> is set on <code>body</code>, while <code>--display</code> was computed on <code>:root</code> (where that variable does not exist). <code>--sans</code> / <code>--display</code> now resolve on <code>body</code>.</li>
+<li><strong>Navigation:</strong> Nav/hero anchors (Home, Projects, Skills, Contact; About and Education section ids as well) overshot because <code>html { scroll-padding-top }</code> stacked with section <code>scroll-margin-top</code> and section padding. Offset is now <code>nav-offset − section padding</code>; scrolling uses <strong><code>scrollToHash</code></strong> + <code>scrollIntoView</code>.</li>
+<li><strong>Contrast / accent:</strong> Brighter body text; accent blue limited to links, primary buttons, active nav, icons, and small borders — not decorative eyebrows/status labels.</li>
+<li><strong>Copy:</strong> Student standing is <strong>3rd year BSCS</strong> (not final-year / Semester 4).</li>
+</ul>
+</body>
+</html>
