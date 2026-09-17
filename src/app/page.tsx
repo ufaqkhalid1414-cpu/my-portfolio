@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ContactForm } from '@/components/site/ContactForm'
+import { HashLink } from '@/components/site/HashLink'
 import { CreamSheet } from '@/components/site/CreamSheet'
 import { FaqList } from '@/components/site/FaqList'
 import { Hero3DSlot } from '@/components/site/Hero3DSlot'
@@ -33,12 +34,12 @@ export default function HomePage() {
                 <Link href="/contact" className="btn-accent inline-flex rounded-full px-6 py-3 text-sm font-medium">
                   {site.cta}
                 </Link>
-                <a
-                  href="#work"
+                <HashLink
+                  href="/#work"
                   className="inline-flex rounded-full border border-cream/25 px-6 py-3 text-sm font-medium text-cream transition hover:border-cream/50"
                 >
                   Recent projects
-                </a>
+                </HashLink>
               </div>
             </Reveal>
           </div>
@@ -184,9 +185,9 @@ export default function HomePage() {
               Email if you want a record. WhatsApp if you want a short conversation.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#write" className="btn-accent inline-flex rounded-full px-6 py-3 text-sm font-medium">
+              <HashLink href="/#write" className="btn-accent inline-flex rounded-full px-6 py-3 text-sm font-medium">
                 {site.cta}
-              </a>
+              </HashLink>
               <Link href="/work" className="btn-ghost-cream inline-flex rounded-full px-6 py-3 text-sm font-medium">
                 Read the case studies
               </Link>

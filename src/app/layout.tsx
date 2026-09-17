@@ -3,6 +3,7 @@ import { Great_Vibes, Oswald, Outfit } from 'next/font/google'
 import type { ReactNode } from 'react'
 import { Footer } from '@/components/site/Footer'
 import { Navbar } from '@/components/site/Navbar'
+import { ScrollToHash } from '@/components/site/ScrollToHash'
 import './globals.css'
 
 const outfit = Outfit({
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         className={`${outfit.variable} ${oswald.variable} ${script.variable} font-sans antialiased`}
       >
         <Navbar />
+        <ScrollToHash />
         <main>{children}</main>
         <Footer />
       </body>

@@ -1,3 +1,4 @@
+import { HashLink } from '@/components/site/HashLink'
 import { navLinks, site } from '@/data/site'
 
 export function Footer() {
@@ -30,9 +31,9 @@ export function Footer() {
           <a className="text-link-accent" href={site.whatsapp.href} target="_blank" rel="noreferrer">
             WhatsApp
           </a>
-          <a className="text-link-accent" href="/#write">
+          <HashLink className="text-link-accent" href="/#write">
             Form
-          </a>
+          </HashLink>
         </div>
       </div>
       <p className="mx-auto mt-10 max-w-[1400px] text-xs text-ink-muted">
