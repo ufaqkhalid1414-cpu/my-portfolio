@@ -45,7 +45,7 @@ export function ProjectCard({
         <div className="flex flex-1 flex-col p-6 md:p-7">
           <h3 className="font-display text-2xl font-semibold tracking-tight uppercase">{title}</h3>
           <p className="mt-2 max-w-[42ch] text-[0.95rem] leading-relaxed text-ink/70">{description}</p>
-          <span className="text-link-accent mt-auto inline-block pt-5 text-sm font-medium">
+          <span className="text-link-accent mt-auto inline-block pt-5 text-sm font-medium group-hover:underline">
             View project
           </span>
         </div>

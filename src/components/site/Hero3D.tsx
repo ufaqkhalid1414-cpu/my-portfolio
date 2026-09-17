@@ -1,121 +1,127 @@
 'use client'
 
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { useReducedMotion } from 'framer-motion'
-import { Suspense, useMemo, useRef } from 'react'
-import {
-  BufferAttribute,
-  BufferGeometry,
-  CanvasTexture,
-  Mesh,
-  SRGBColorSpace,
-  TextureLoader,
-} from 'three'
+import { useRef } from 'react'
+import type { Group } from 'three'
 
-const FACE_IMAGES = [
-  '/images/smart-campus/dashboard.png?v=10',
-  '/images/shadow-warrior/combat.png',
-]
+const SKIN = '#E6D2C4'
+const HAIR = '#1C1612'
+const BLAZER = '#2B2B2B'
+const BLOUSE = '#F4F1EA'
+const PANTS = '#35353A'
+const SHOE = '#141414'
+const ACCENT = '#E8622C'
 
-function createPyramidGeometry() {
-  const geo = new BufferGeometry()
-  const s = 1.35
-  const v = [
-    [0, s, 0],
-    [s, -s, s],
-    [-s, -s, s],
-    [0, -s, -s],
-  ]
+function Character({ reduce }: { reduce: boolean }) {
+  const root = useRef<Group>(null)
+  const leftArm = useRef<Group>(null)
+  const rightArm = useRef<Group>(null)
 
-  const faces = [
-    [0, 1, 2],
-    [0, 2, 3],
-    [0, 3, 1],
-    [1, 3, 2],
-  ]
-
-  const positions: number[] = []
-  const uvs: number[] = []
-  const normals: number[] = []
-
-  faces.forEach((face) => {
-    const a = v[face[0]]
-    const b = v[face[1]]
-    const c = v[face[2]]
-    positions.push(...a, ...b, ...c)
-    uvs.push(0.5, 1, 0, 0, 1, 0)
-    const ux = b[0] - a[0]
-    const uy = b[1] - a[1]
-    const uz = b[2] - a[2]
-    const vx = c[0] - a[0]
-    const vy = c[1] - a[1]
-    const vz = c[2] - a[2]
-    const nx = uy * vz - uz * vy
-    const ny = uz * vx - ux * vz
-    const nz = ux * vy - uy * vx
-    const len = Math.hypot(nx, ny, nz) || 1
-    const n = [nx / len, ny / len, nz / len]
-    normals.push(...n, ...n, ...n)
-  })
-
-  geo.setAttribute('position', new BufferAttribute(new Float32Array(positions), 3))
-  geo.setAttribute('uv', new BufferAttribute(new Float32Array(uvs), 2))
-  geo.setAttribute('normal', new BufferAttribute(new Float32Array(normals), 3))
-  geo.addGroup(0, 3, 0)
-  geo.addGroup(3, 3, 1)
-  geo.addGroup(6, 3, 2)
-  geo.addGroup(9, 3, 3)
-  return geo
-}
-
-function makeCertTexture() {
-  const canvas = document.createElement('canvas')
-  canvas.width = 1024
-  canvas.height = 1024
-  const ctx = canvas.getContext('2d')
-  if (!ctx) return new CanvasTexture(canvas)
-  ctx.fillStyle = '#F4F1EA'
-  ctx.fillRect(0, 0, 1024, 1024)
-  ctx.fillStyle = '#E8622C'
-  ctx.fillRect(0, 0, 1024, 28)
-  ctx.fillStyle = '#0D0D0D'
-  ctx.font = '700 64px sans-serif'
-  ctx.fillText('CERT SYSTEM', 80, 200)
-  ctx.fillStyle = '#E8622C'
-  ctx.font = '500 44px sans-serif'
-  ;['Specify', 'Design', 'Build', 'Test'].forEach((label, index) => {
-    ctx.fillText(`${String(index + 1).padStart(2, '0')}  ${label}`, 80, 380 + index * 130)
-  })
-  const texture = new CanvasTexture(canvas)
-  texture.colorSpace = SRGBColorSpace
-  texture.needsUpdate = true
-  return texture
-}
-
-function TexturedPyramid({ reduce }: { reduce: boolean }) {
-  const mesh = useRef<Mesh>(null)
-  const photoTextures = useLoader(TextureLoader, FACE_IMAGES)
-  const certTexture = useMemo(() => makeCertTexture(), [])
-  const geometry = useMemo(() => createPyramidGeometry(), [])
-
-  photoTextures.forEach((texture) => {
-    texture.colorSpace = SRGBColorSpace
-    texture.needsUpdate = true
-  })
-
-  useFrame((_, delta) => {
-    if (!mesh.current || reduce) return
-    mesh.current.rotation.y += delta * 0.07
-    mesh.current.rotation.x += delta * 0.016
+  useFrame((state) => {
+    if (reduce) return
+    const t = state.clock.elapsedTime
+    if (root.current) {
+      root.current.rotation.y = 0.16 + Math.sin(t * 0.32) * 0.18
+      root.current.position.y = -0.92 + Math.sin(t * 1.1) * 0.02
+    }
+    if (leftArm.current) {
+      leftArm.current.rotation.x = -0.12 + Math.sin(t * 1.05) * 0.12
+    }
+    if (rightArm.current) {
+      rightArm.current.rotation.x = 0.28 + Math.sin(t * 1.05 + Math.PI) * 0.08
+      rightArm.current.rotation.z = -0.18
+    }
   })
 
   return (
-    <mesh ref={mesh} geometry={geometry} rotation={[0.18, 0.35, 0]}>
-      <meshStandardMaterial attach="material-0" map={photoTextures[0]} roughness={0.72} />
-      <meshStandardMaterial attach="material-1" map={certTexture} roughness={0.72} />
-      <meshStandardMaterial attach="material-2" map={photoTextures[1]} roughness={0.72} />
-      <meshStandardMaterial attach="material-3" color="#C24A1F" roughness={0.6} />
-    </mesh>
+    <group ref={root} position={[0, -0.92, 0]} scale={1.12}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]} receiveShadow>
+        <cylinderGeometry args={[1.15, 1.15, 0.05, 48]} />
+        <meshStandardMaterial color="#141414" roughness={0.9} />
+      </mesh>
+
+      <mesh position={[-0.13, 0.14, 0.03]} castShadow>
+        <capsuleGeometry args={[0.09, 0.5, 6, 12]} />
+        <meshStandardMaterial color={PANTS} roughness={0.68} />
+      </mesh>
+      <mesh position={[0.13, 0.14, 0.03]} castShadow>
+        <capsuleGeometry args={[0.09, 0.5, 6, 12]} />
+        <meshStandardMaterial color={PANTS} roughness={0.68} />
+      </mesh>
+      <mesh position={[-0.13, -0.16, 0.1]} rotation={[0.12, 0, 0]} castShadow>
+        <boxGeometry args={[0.18, 0.08, 0.3]} />
+        <meshStandardMaterial color={SHOE} roughness={0.5} />
+      </mesh>
+      <mesh position={[0.13, -0.16, 0.1]} rotation={[0.12, 0, 0]} castShadow>
+        <boxGeometry args={[0.18, 0.08, 0.3]} />
+        <meshStandardMaterial color={SHOE} roughness={0.5} />
+      </mesh>
+
+      <mesh position={[0, 0.78, 0]} castShadow>
+        <boxGeometry args={[0.52, 0.58, 0.28]} />
+        <meshStandardMaterial color={BLAZER} roughness={0.6} />
+      </mesh>
+      <mesh position={[0, 0.86, 0.145]} castShadow>
+        <boxGeometry args={[0.16, 0.32, 0.03]} />
+        <meshStandardMaterial color={BLOUSE} roughness={0.5} />
+      </mesh>
+      <mesh position={[0.2, 0.92, 0.15]} castShadow>
+        <boxGeometry args={[0.035, 0.08, 0.02]} />
+        <meshStandardMaterial color={ACCENT} roughness={0.4} />
+      </mesh>
+
+      <group ref={leftArm} position={[-0.34, 0.96, 0]}>
+        <mesh position={[0, -0.26, 0]} castShadow>
+          <capsuleGeometry args={[0.065, 0.38, 6, 12]} />
+          <meshStandardMaterial color={BLAZER} roughness={0.6} />
+        </mesh>
+        <mesh position={[0, -0.5, 0]} castShadow>
+          <sphereGeometry args={[0.075, 16, 16]} />
+          <meshStandardMaterial color={SKIN} roughness={0.55} />
+        </mesh>
+      </group>
+      <group ref={rightArm} position={[0.34, 0.96, 0]}>
+        <mesh position={[0, -0.26, 0]} castShadow>
+          <capsuleGeometry args={[0.065, 0.38, 6, 12]} />
+          <meshStandardMaterial color={BLAZER} roughness={0.6} />
+        </mesh>
+        <mesh position={[0, -0.5, 0]} castShadow>
+          <sphereGeometry args={[0.075, 16, 16]} />
+          <meshStandardMaterial color={SKIN} roughness={0.55} />
+        </mesh>
+      </group>
+
+      <mesh position={[0, 1.28, -0.04]} castShadow>
+        <sphereGeometry args={[0.24, 24, 24]} />
+        <meshStandardMaterial color={HAIR} roughness={0.75} />
+      </mesh>
+      <mesh position={[-0.16, 1.22, 0.02]} castShadow>
+        <sphereGeometry args={[0.12, 16, 16]} />
+        <meshStandardMaterial color={HAIR} roughness={0.75} />
+      </mesh>
+      <mesh position={[0.16, 1.22, 0.02]} castShadow>
+        <sphereGeometry args={[0.12, 16, 16]} />
+        <meshStandardMaterial color={HAIR} roughness={0.75} />
+      </mesh>
+      <mesh position={[0.02, 1.02, -0.12]} rotation={[0.35, 0, 0.15]} castShadow>
+        <capsuleGeometry args={[0.08, 0.38, 6, 12]} />
+        <meshStandardMaterial color={HAIR} roughness={0.75} />
+      </mesh>
+
+      <mesh position={[0, 1.26, 0.06]} castShadow>
+        <sphereGeometry args={[0.185, 24, 24]} />
+        <meshStandardMaterial color={SKIN} roughness={0.5} />
+      </mesh>
+      <mesh position={[-0.055, 1.28, 0.22]}>
+        <sphereGeometry args={[0.022, 12, 12]} />
+        <meshStandardMaterial color="#1A1A1A" roughness={0.4} />
+      </mesh>
+      <mesh position={[0.055, 1.28, 0.22]}>
+        <sphereGeometry args={[0.022, 12, 12]} />
+        <meshStandardMaterial color="#1A1A1A" roughness={0.4} />
+      </mesh>
+    </group>
   )
 }
 
@@ -125,16 +131,24 @@ export function Hero3D() {
   return (
     <div
       id="hero-3d"
+      aria-label="3D character"
       className="h-[280px] overflow-hidden rounded-[32px] border border-cream/10 bg-[#161616] shadow-[inset_0_-40px_80px_rgb(0_0_0_/_0.35)] lg:h-[420px] lg:translate-y-8"
     >
-      <Canvas camera={{ position: [0, 0.28, 4.7], fov: 36 }} gl={{ antialias: true, alpha: true }}>
-        <ambientLight intensity={0.62} />
-        <directionalLight position={[2.4, 3.2, 2.2]} intensity={0.48} color="#F4F1EA" />
-        <pointLight position={[2, 1.2, 1.6]} intensity={0.28} color="#E8622C" />
-        <pointLight position={[-1.8, -0.8, 1]} intensity={0.12} color="#F4F1EA" />
-        <Suspense fallback={null}>
-          <TexturedPyramid reduce={reduce} />
-        </Suspense>
+      <Canvas
+        camera={{ position: [1.45, 0.62, 3.7], fov: 34 }}
+        gl={{ antialias: true, alpha: true }}
+        shadows
+      >
+        <ambientLight intensity={0.58} />
+        <directionalLight
+          position={[2.4, 3.4, 2.4]}
+          intensity={1.05}
+          color="#F4F1EA"
+          castShadow
+        />
+        <pointLight position={[2, 1.2, 1.6]} intensity={0.32} color="#E8622C" />
+        <pointLight position={[-1.8, -0.4, 1]} intensity={0.14} color="#F4F1EA" />
+        <Character reduce={reduce} />
       </Canvas>
     </div>
   )

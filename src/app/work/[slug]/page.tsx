@@ -130,25 +130,19 @@ export default async function CaseStudyPage({ params }: PageProps) {
             </div>
           </Reveal>
 
-          <div className="mt-20 grid grid-cols-2 items-start gap-6 border-t border-ink/10 pt-10">
+          <div className="mt-20 grid grid-cols-1 gap-4 border-t border-ink/10 pt-10 sm:grid-cols-2">
             {previousProject ? (
-              <Link
-                href={`/work/${previousProject.slug}`}
-                className="text-link-accent justify-self-start text-left text-sm leading-snug md:text-base"
-              >
-                ← Previous project
-                <span className="mt-1 block text-ink/70">{previousProject.title}</span>
+              <Link href={`/work/${previousProject.slug}`} className="case-nav text-left">
+                <span className="text-xs tracking-[0.14em] text-ink/45">Previous</span>
+                <span className="mt-1 font-medium">{previousProject.title}</span>
               </Link>
             ) : (
               <span />
             )}
             {nextProject ? (
-              <Link
-                href={`/work/${nextProject.slug}`}
-                className="text-link-accent justify-self-end text-right text-sm leading-snug md:text-base"
-              >
-                Next project →
-                <span className="mt-1 block text-ink/70">{nextProject.title}</span>
+              <Link href={`/work/${nextProject.slug}`} className="case-nav sm:justify-self-end sm:text-right">
+                <span className="text-xs tracking-[0.14em] text-ink/45">Next</span>
+                <span className="mt-1 font-medium">{nextProject.title}</span>
               </Link>
             ) : (
               <span />
