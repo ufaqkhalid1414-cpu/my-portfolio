@@ -2,15 +2,15 @@
 
 **Product:** Ufaq Khalid — Personal Portfolio Website  
 **Owner:** Ufaq Khalid  
-**Document type:** PRD (v1)  
-**Status:** Implemented (current product)  
-**Last updated:** 15 September 2026
+**Document type:** PRD (v1, updated in place — not a second PRD)  
+**Status:** Implemented (current product); public Vercel URL when deployed  
+**Last updated:** 17 September 2026
 
 ---
 
 ## 1. Overview
 
-This is **Ufaq Khalid’s personal portfolio website**: a fast, single-page site that presents who she is, what she can build, and how to reach her.
+This is **Ufaq Khalid’s personal portfolio website**: a multi-page Next.js site that presents who she is, the three strongest academic projects, and how to reach her.
 
 A first-time visitor should immediately understand that she is a **3rd year BSCS student** who builds **practical, functional web-based systems**, and that she is **open to real project work** and growing as a developer.
 
@@ -30,6 +30,8 @@ A first-time visitor should immediately understand that she is a **3rd year BSCS
 | Out of focus | Internship recruiting as a primary narrative |
 
 The **#1 visitor** is a small business owner or someone with a web/software project who needs it built. Within ~30 seconds they should be able to answer: *“Can this person actually build what I need?”*
+
+**Professors / academic reviewers** are a first-class secondary audience: they need a **public URL** (not `localhost`) they can open on any device.
 
 ---
 
@@ -72,129 +74,124 @@ Internship-focused recruiters and internship-first messaging.
 
 ## 4. Site Content
 
-Single-page site with in-page sections. English only.
+**Shipped IA:** multi-page App Router site (not a single scrolling page). English only.
+
+| Route | Role |
+| --- | --- |
+| `/` | Home: headline, quiet 3D object, selected work, how I work |
+| `/work` | All three case studies as cards |
+| `/work/[slug]` | Full case study (challenge, approach, visuals, outcome) |
+| `/about` | Bio, values, tools, talk — **no photo** |
+| `/contact` | Form + direct email, phone, GitHub, WhatsApp |
 
 ### 4.1 Navbar
 
 | Item | Requirement |
 | --- | --- |
-| Left | Name / wordmark: **Ufaq Khalid** |
-| Links (order) | Home · About · Skills · Projects · Contact |
-| Right | **Resume** control |
+| Left | Name / wordmark: **Ufaq Khalid** (script) |
+| Links (order) | Home · Work · About · Contact |
+| Right | **Let’s Talk** → `/contact` |
 | Behavior | Sticky on scroll |
-| Theme | Dark theme only — **no** theme toggle |
-| Social | **No** social icons in the navbar (footer only) |
+| Theme | Ink / cream editorial — **no** theme toggle |
+| Social | **No** social icons in the navbar (footer + Contact / About) |
 
-**Resume control (v1):** Do **not** use a broken download link. Show a **“Resume coming soon”** state until a PDF is provided.
+No Resume control in the current build (no PDF yet). Do **not** add a broken download link.
 
-### 4.2 Hero
+### 4.2 Home
 
-**Headline:** I’m Ufaq Khalid.  
-**Supporting line:** 3rd year BSCS student building practical, functional web-based systems.
+**Headline (locked):** I build systems that hold up under pressure.  
+**Supporting line:** Systems that stay coherent when more than one person has to rely on them.
 
-**Buttons:**
+**3D:** One pyramid (`Hero3D`) with project textures. Motion is **slow and quiet** (not a second 3D scene). Honors `prefers-reduced-motion`.
 
-- Primary: **View Projects** (smooth-scroll to Projects)
-- Secondary: **Download Resume** — same “coming soon” behavior until the PDF exists
+**Selected work:** Three equal-height cards → case study routes.
 
-**Must-have facts (visible in hero, not as a photo):**
-
-- 3rd year BSCS student
-- University of Central Punjab (Gujranwala Campus)
-- CGPA **3.45**
-- Based in Gujranwala, Pakistan
-- Open to project work
-
-**Photo:** **None.** No headshot in the hero or anywhere else.
+**How I work:** Data first · Specify, then build · Concepts in use.
 
 ### 4.3 About
 
-Short, simple, professional, easy to read — no fancy or complicated wording.
+No headshot. Empty photo slots are **not** allowed.
 
-**Story:**
+**Header:** Title **About** plus fact row: Study, CGPA, Campus, Based (from `src/data/site.ts`).
 
-- 3rd year BSCS student at University of Central Punjab, Gujranwala
-- Enjoys building practical web-based systems and learning through real projects
-- Education (CGPA 3.45, 3rd year) mentioned **briefly in copy**, plus University / CGPA / Focus stat cards
+**Blocks:**
 
-**Skills:** Not inside About — dedicated Skills section.
+- **Bio** — locked copy (three paragraphs)
+- **What I Care About** — locked copy
+- **Languages & Tools** — HTML, CSS, JavaScript, PHP, MySQL, C++, Unity (C#)
+- **Talk** — email + WhatsApp (same number as Contact)
 
-### 4.4 Skills
+### 4.4 Work / case studies
 
-Grouped tags/pills, **glassmorphism**, **no icons**.
+Three projects. **Separate pages** (not expand-in-place). **No filters.**
 
-| Group | Items |
-| --- | --- |
-| Languages / Programming | C++, JavaScript |
-| Web (Front-End) | HTML, CSS |
-| Databases | MySQL |
-| Tools | XAMPP, Visual Studio |
-| Other | Requirement Engineering (SRS documentation, Use Case & Sequence Diagrams) |
+Each case study: Challenge, Approach, The Work (visuals or process timeline), Outcome, prev/next.
 
-This is the full current skill set; nothing extra to list or hide.
+**No GitHub or live demo links** on project cards (academic work).
 
-### 4.5 Projects
+#### Project 1 — Smart Campus
 
-Simple list of **3** projects. **No filters.** **No separate project pages.** Clicking a card **expands more detail on the same page**.
+A DBMS / student management system (attendance, performance, department records).
 
-Each card:
+**Stack (in copy):** relational design, role-based frontend (Admin, Faculty, Student).
 
-- Title
-- Short description (2–3 sentences)
-- Placeholder / generic image if no real screenshot yet
-- Tech stack tags **except** for the documentation-only project
+**Visuals (17 Sept 2026):** Real screenshots, not placeholders.
 
-**No GitHub or live demo links** in v1 (academic projects).
+- Login (full page, chrome/taskbar cropped)
+- Student dashboard: stats, performance summary, quick links stacked as **one page**; no leftover duplicate headings; no Smart Campus left nav
+- Admin dashboard: stats, system summary, attendance trend, at-risk pie, **quick actions**, notifications — **equal-width column**, no leftover left-nav sliver
+- Module shots with **full sidebar** where it belongs (faculty, departments, students, courses)
+- Grade management: faculty-style grades table; black header recolored **blue** with sharp white labels
+- Removed from the gallery: attendance module, performance analytics, incomplete bar-chart / department-performance slices
+- Screenshots sit **inset** (cream margin, centered) so they are not edge-to-edge zoomed
+- Cover on Work index: login
 
-#### Project 1 — Smart Campus Attendance & Performance Analytics System
+#### Project 2 — Online Training & Certification System
 
-A web-based DBMS platform for universities to manage attendance, track performance, and generate reports.
+SRS-led architecture. Strength is process: WBS, Gantt, critical path, modular sequence.
 
-**Stack tags:** MySQL, PHP, HTML, CSS, JavaScript
+**Visuals:** Compact process timeline on the work card; full timeline + WBS on the case study. Documentation-only — **no coded-stack tags**.
 
-#### Project 2 — Dark Veil Odyssey
+#### Project 3 — Shadow Warrior
 
-A game project built in Visual Studio applying data structures and algorithms (DSA) for game logic and interactivity.
+Unity (C#) combat / DSA. FSM, triggers, Rigidbody2D. Combat + boss screenshots.
 
-**Stack tags:** Visual Studio, DSA (and related implementation details as available)
-
-#### Project 3 — Online Training & Certification System
-
-A complete Software Requirement Specification (SRS) including Use Case and Sequence diagrams for a web-based training platform.
-
-**Important:** Documentation-only — **no code and no live demo**. The card must state this clearly and **must not** show coded-project tech tags (PHP/HTML/etc.). Use documentation labels (e.g. SRS, Use Cases, Sequence Diagrams) only.
-
-### 4.6 Contact
-
-**Heading:** Let’s Work on a Project
+### 4.5 Contact
 
 **On-page details (always visible):**
 
 - Email: [ufaqkhalid1414@gmail.com](mailto:ufaqkhalid1414@gmail.com)
 - Phone: 0322-6037970 (`tel:+923226037970`)
-- **WhatsApp:** button/link using the same number so visitors can message directly (`https://wa.me/923226037970`)
+- GitHub: https://github.com/ufaqkhalid1414-cpu
+- **WhatsApp:** `https://wa.me/923226037970` (free `wa.me` link — **no paid API**)
 
-**Form fields:** Name, Email, Message  
-**v1 submission:** Working **`mailto:`** (pre-filled) until Formspree is configured.  
-**Later:** Formspree forwarding to the email above — no data storage.
+**Form fields:** Name, Email, Subject, Message  
 
-**Success copy after submit (when a real form backend exists):**
+**Submission (free, no backend product):**
 
-> Thank you for reaching out! I really appreciate you taking the time to connect. I'll review your message and get back to you as soon as I can.
+- **Send email** → `mailto:` draft
+- **Send on WhatsApp** → opens WhatsApp with the typed message; visitor taps Send
 
-**TBD (placeholders only):** LinkedIn URL, GitHub profile URL.
+**On-site confirmation (not a WhatsApp/Gmail auto-reply):** After send, the form is replaced by a short thank-you: message received, reply within a day. Optional phone-side **WhatsApp Business away message** is out of the website (free app setting, not an API).
 
-### 4.7 Footer
+**Paid contact products are out of scope:** WhatsApp Business API, Formspree unless later requested.
 
-Minimal:
+### 4.6 Footer
 
 - Name: Ufaq Khalid
-- Tagline: **BSCS Student & Web Developer** (or equivalent)
-- Email again
+- Tagline: Third-year BSCS student in Gujranwala. Databases, specification, and systems that stay coherent.
+- Email, GitHub, WhatsApp
 - Copyright: **© 2026**
-- Social: GitHub / LinkedIn **TBD** (omit or disable until URLs exist)
 
 **Not in footer:** Back-to-top, repeated full nav.
+
+### 4.7 Motion and chrome (17 Sept 2026)
+
+- **Reveal:** One fade + 14px rise, ~0.6s, once per block, `prefers-reduced-motion` skips it
+- **Hover:** Buttons and work cards lift slightly with a light shadow (no scale-pop)
+- **Favicon:** `UK` on ink with accent bar (`src/app/icon.svg`)
+- **Link preview:** `/og.png` + Open Graph / Twitter metadata (used when the public URL is shared)
+- **3D:** Existing pyramid only; slower rotation, softer light
 
 ---
 
@@ -205,21 +202,22 @@ Minimal:
 | ID | Requirement |
 | --- | --- |
 | FR-1 | Fully **responsive** layout: mobile, tablet, and desktop |
-| FR-2 | **Smooth scroll** between sections (nav + hero CTAs) via `scrollIntoView` (`scrollToHash` utility). Offset uses `scroll-margin-top` only — do **not** also set `html` `scroll-padding-top`, which stacked and overshot the heading |
+| FR-2 | App Router routes for Home, Work, About, Contact, case studies |
 | FR-3 | **Mobile hamburger** menu for navigation |
-| FR-4 | Resume control that never 404s; PDF download when file exists, otherwise “coming soon” |
-| FR-5 | Contact form **basic validation** (name, email format, non-empty message) |
-| FR-6 | Email, phone, and **WhatsApp** actions work from Contact |
-| FR-7 | Project cards **expand in place** for extra detail |
-| FR-8 | Single static portfolio — **no** accounts, login, blog, or admin |
+| FR-4 | Contact form **validation**; email needs all fields; WhatsApp needs name + message |
+| FR-5 | Email, phone, GitHub, and **WhatsApp** actions work from Contact (and Talk on About) |
+| FR-6 | Case study pages with locked copy and real visuals where provided |
+| FR-7 | No accounts, login, blog, or admin |
+| FR-8 | No photo / headshot anywhere |
+| FR-9 | No paid third-party messaging APIs |
 
-### Nice-to-have
+### Nice-to-have (shipped)
 
 | ID | Requirement |
 | --- | --- |
-| NFR-UX-1 | Sticky nav **highlights the current section** while scrolling |
-| NFR-UX-2 | Light **fade-in** as sections enter the viewport |
-| NFR-UX-3 | Shared **`.card-hover`** glow (soft accent `box-shadow` only, 200ms ease) on About stats, Skills categories, Projects cards, Contact info pills, and Education card — no extra scale or border-color change on those boxes |
+| NFR-UX-1 | Scroll **reveal** on major blocks |
+| NFR-UX-2 | Card / button hover lift + shadow |
+| NFR-UX-3 | Quiet hero 3D; reduced-motion safe |
 
 ---
 
@@ -227,14 +225,15 @@ Minimal:
 
 | Area | Requirement |
 | --- | --- |
-| Performance | Fast and lightweight; no heavy unnecessary images or effects |
-| Accessibility (v1) | Readable **contrast** (body copy is a brighter muted gray, e.g. `#c8cad6` on `#0d1117`); **keyboard-navigable** nav and form. Advanced screen-reader work is not required now |
-| SEO | Page title and meta description, e.g. **Ufaq Khalid — BSCS Student & Web Developer Portfolio** |
+| Performance | Fast; screenshots compressed as PNG; no extra 3D scenes |
+| Accessibility (v1) | Keyboard-navigable nav and form; `:focus-visible`; reduced-motion |
+| SEO | Title, description, Open Graph image |
 | Browsers | Latest **Chrome, Edge, Firefox**. No support for very old browsers |
 | Language | English only |
-| Hosting | Deploy on **Vercel**, connected to the GitHub repo, when the site is ready |
-| Contact privacy | No stored form database. v1: `mailto:`. Later: **Formspree** forwards to email |
-| Analytics | **Not required** in v1 |
+| Hosting | **Vercel** (free), GitHub repo `ufaqkhalid1414-cpu/my-portfolio` |
+| Contact privacy | No stored form database. `mailto:` + `wa.me` only |
+| Analytics | **Not required** |
+| Cost | **No paid APIs or paid hosting add-ons** |
 
 ---
 
@@ -242,20 +241,18 @@ Minimal:
 
 | Token | Direction |
 | --- | --- |
-| Theme | Dark only |
-| Background | Deep navy-black **`#0d1117`**; alternate sections use a slightly lighter shade (**`#10151c`**) so the page is not one flat block |
-| Cards | **`#161b22`**, 1px low-opacity borders |
-| Accent | **`#6b9eff`** — reserved for **links, primary buttons, active nav, icons, and thin accent borders**. Do not use it as decorative fill on labels/eyebrows |
-| Text | Headings near-white (`#f0f3f6`); body **muted gray** (`#c8cad6`) for contrast on navy |
-| Surfaces | Card surfaces with subtle borders and a shared hover glow (see `.card-hover`) |
-| Type | **Inter** for body; **Space Grotesk** for headings (`h1`/`h2`/`h3`). Font CSS variables must be defined where Next.js `next/font` classes apply (on `body`, not only `:root`), or headings silently fall back to Times New Roman |
-| Layout | Single page, centered content, reasonable **max-width** (not edge-to-edge on large screens) |
+| Theme | Ink field + cream sheets (not flat navy glassmorphism) |
+| Ink | `#0d0d0d` |
+| Cream | `#f4f1ea` / cream-deep `#e8e3d6` |
+| Accent | `#e8622c` — buttons and links |
+| Type | **Outfit** body, **Oswald** display, **Great Vibes** wordmark (`next/font`) |
+| Layout | Centered, max-width ~1400px; screenshots inset in cream frames |
 | Photo | None |
-| Vibe | Minimal, techy, clean — professional but not corporate-stiff |
+| Vibe | Calm, editorial, senior-student — not hype, not extra 3D |
 
-**Do not use:** neon colors, excessive motion, cluttered/busy layouts.
+**Do not use:** neon, particle fields, extra WebGL scenes, cluttered layouts.
 
-Styling approach: global CSS (`src/index.css`) with design tokens as CSS variables. Hover on cards is **`.card-hover`** (`box-shadow: 0 0 20px` at 30% accent opacity, `200ms ease`).
+Styling: **Tailwind CSS v4** (`src/app/globals.css` tokens).
 
 ---
 
@@ -263,119 +260,131 @@ Styling approach: global CSS (`src/index.css`) with design tokens as CSS variabl
 
 | Layer | Choice | Notes |
 | --- | --- | --- |
-| App | **Next.js** (App Router) | `src/app/layout.tsx` + `src/app/page.tsx`; not Vite or a static HTML/CSS/JS site |
-| UI | **React** | Single-page portfolio sections on `/` |
+| App | **Next.js** (App Router) | `src/app/` routes |
+| UI | **React** | |
 | Language | **TypeScript** | |
-| CSS | Global CSS + CSS variables | `src/index.css` (not Tailwind) |
-| Fonts | **`next/font`** | Inter + Space Grotesk |
-| Motion | **Framer Motion** + CSS | Section/hero entrance; card hover is CSS-only |
-| In-page nav | **`scrollToHash`** | `src/lib/scrollToHash.ts` — `scrollIntoView({ block: 'start' })` so `scroll-margin-top` is honored |
-| Contact (later) | **Formspree** | After account + form ID exist |
-| Hosting | **Vercel** | Linked to GitHub |
+| CSS | **Tailwind v4** | Design tokens in `globals.css` |
+| Fonts | **`next/font`** | Outfit, Oswald, Great Vibes |
+| Motion | **Framer Motion** | `Reveal`, timeline, reduced-motion |
+| 3D | **React Three Fiber** + Three | One hero pyramid |
+| Contact | `mailto:` + `wa.me` | No Formspree, no WhatsApp API |
+| Hosting | **Vercel** | Free; public URL for sharing |
 
-No extra product features that would require a backend, CMS, or auth. Dev: `npm run dev` → **http://localhost:3000**.
+No backend, CMS, or auth. Dev: `npm run dev` → **http://localhost:3000**.
 
 ---
 
 ## 9. Outstanding Content Needed
 
-### Still TBD (blockers for a “complete” live site)
+### Still optional (not blockers for a professor link)
 
-| Item | v1 workaround |
+| Item | Status |
 | --- | --- |
-| Resume PDF | “Resume coming soon” — no broken link |
-| LinkedIn URL | Omit or placeholder in footer |
-| Public GitHub profile URL | Omit or placeholder in footer |
-| Real screenshots for 3 projects | Generic / placeholder visuals |
-| Formspree form ID | Working `mailto:` until set up |
+| Resume PDF | Not in the UI — skip until a file exists |
+| Visitor photo | **Do not add** |
+| Formspree / paid mail | **Do not add** |
+| WhatsApp Business away message | Phone setting, optional, free |
+| Custom domain | Optional later; `*.vercel.app` is enough |
 
 ### Explicitly not needed
 
-- Headshot / photo assets — **do not add a photo section**
+- Headshot / photo assets
+- Paid WhatsApp or email APIs
 
-### Already known / ready to implement
+### Already known / shipped
 
-- Name, role, tagline, bio direction
+- Name, routes, locked case-study copy
 - Education: BSCS, **3rd year**, UCP Gujranwala, CGPA 3.45
-- Skills list and grouping
-- All 3 project titles, descriptions, and stack/documentation treatment
-- Email and phone (and WhatsApp from the same number)
-- Design direction (colors, type, glassmorphism)
+- Tools list
+- All 3 project treatments
+- Email, phone, WhatsApp, GitHub profile
+- Smart Campus screenshot set (17 Sept)
 
 ---
 
 ## 10. Success Metrics
 
-**Timeframe:** first 3–6 months. **No visit analytics** in v1.
+**Timeframe:** first 3–6 months. **No visit analytics.**
 
 ### Success looks like
 
-- A visitor understands the **3 projects and skills** without asking extra questions
-- Contact is **one click away** (email, phone, WhatsApp visible — no digging)
-- The site looks **clean and professional on mobile and desktop**
-- At least **one real inquiry or small project opportunity** from someone who found the site
+- A visitor understands the **3 projects** without asking extra questions
+- Contact is **one click away** (email, phone, WhatsApp — no digging)
+- A professor can open a **public URL** without Ufaq’s laptop
+- The site looks **clean on mobile and desktop**
+- At least **one real inquiry or small project opportunity**
 
 ### Failure looks like
 
+- Only `localhost` exists when someone needs to review the work
 - Broken or unfinished appearance on mobile
 - Visitors cannot tell what the projects actually are
 - People cannot figure out how to contact Ufaq easily
 
 ---
 
-## 11. Out of Scope (v1)
+## 11. Out of Scope
 
-Do **not** build in this version:
+Do **not** build:
 
 - Blog, CMS, extra marketing pages
 - Accounts, login, admin, dashboards
 - Light/dark **theme toggle**
-- Internship-first positioning or dedicated internship funnel
+- Internship-first positioning
 - GitHub / live demo links on project cards
-- Separate project detail routes
 - Project filters / search
 - Headshot / photo
 - Analytics / visit tracking
-- Email automation beyond Formspree (later) or `mailto:` (now)
+- Paid email/WhatsApp automation
 - Multilingual support
 - Testimonials, client logos, or a services pricing page
-- Advanced accessibility / screen-reader certification work
-- Back-to-top control and repeated footer nav
-- Extra animation libraries or heavy motion
+- Extra 3D scenes or heavy motion
+- Back-to-top and repeated footer nav
 
-**WhatsApp is in scope** (added after the first contact pass): a visible WhatsApp action using 0322-6037970.
+**WhatsApp via `wa.me` is in scope** (free). **WhatsApp Business API is out of scope.**
 
 ---
 
-## Appendix A — Resolved decisions (interview)
+## Appendix A — Resolved decisions
 
 | Topic | Decision |
 | --- | --- |
 | Internships | Not a focus; skip internship messaging |
-| Photo in hero | Originally requested; **final decision: no photo** |
-| WhatsApp | Originally deferred; **final decision: include** |
-| Contact backend | `mailto:` now; Formspree when ID exists |
-| Tech | **Next.js** (App Router) + React + TypeScript + global CSS. Original interview said Vite/Tailwind; **shipped stack is Next.js**. |
-| Projects | 3 cards, expand in place, placeholders OK |
-| SRS project | Documentation-only; call that out; no coded-stack tags |
-| Academic year | **3rd year BSCS student** (not final-year) |
+| Photo | **No photo** anywhere (About has no portrait slot) |
+| WhatsApp | Include via free `wa.me`; no paid API |
+| Contact backend | `mailto:` + `wa.me`; on-site thank-you only |
+| Tech | Next.js App Router + React + TypeScript + Tailwind v4 |
+| Projects | 3 case studies, **own routes**, real screenshots where we have them |
+| SRS project | Documentation / process; timeline on the card |
+| Academic year | **3rd year BSCS student** |
+| Game name | **Shadow Warrior** (not Dark Veil Odyssey) |
+| Public URL | Vercel free hosting when Ufaq asks to publish |
 
 ## Appendix B — Public contact (approved to publish)
 
 - **Email:** ufaqkhalid1414@gmail.com  
 - **Phone:** 0322-6037970  
 - **WhatsApp:** https://wa.me/923226037970  
+- **GitHub:** https://github.com/ufaqkhalid1414-cpu  
 - **Location:** Gujranwala, Pakistan  
 
 ---
 
 ## 12. Changelog
 
+### 17 September 2026
+
+- **IA:** Multi-page site (Home, Work, About, Contact, `/work/[slug]`). Navbar is Home · Work · About · Contact + Let’s Talk.
+- **Design:** Ink/cream editorial (Oswald / Outfit / Great Vibes). No glassmorphism single-pager.
+- **Smart Campus visuals:** Login; stacked student dashboard; stacked admin dashboard with equal-width System Summary, Attendance Trend, At-Risk, Quick Actions, notifications; module screens with full sidebars; Grade Management (blue header, sharp labels). Attendance / analytics / incomplete bar charts removed. Screenshots inset, not full-bleed zoom.
+- **About:** No photo. Fact row + Talk (email + WhatsApp).
+- **Contact:** Subject field; Send email + Send on WhatsApp; on-site thank-you (reply within a day). No paid APIs.
+- **Footer / GitHub:** Profile URL set.
+- **Motion:** Quiet scroll reveals; button/card hover lift + shadow; slower 3D.
+- **Share chrome:** Favicon (UK), `/og.png` Open Graph.
+- **Hosting:** Public Vercel URL (free) for professors and other visitors — this is the site address, not a button on the pages.
+
 ### 15 September 2026
 
 - **Stack:** Portfolio runs on **Next.js** (App Router), not Vite and not plain HTML/CSS/JS.
-- **Hover:** Shared **`.card-hover`** / `GlassCard` hover — identical soft accent glow on About stats (University, CGPA, Focus), Skills category cards, Projects cards, Contact info boxes (email, phone, location), and Education.
-- **Typography:** Display font (Space Grotesk) was falling back to Times New Roman because `--font-space` from `next/font` is set on `body`, while `--display` was computed on `:root` (where that variable does not exist). `--sans` / `--display` now resolve on `body`.
-- **Navigation:** Nav/hero anchors (Home, Projects, Skills, Contact; About and Education section ids as well) overshot because `html { scroll-padding-top }` stacked with section `scroll-margin-top` and section padding. Offset is now `nav-offset − section padding`; scrolling uses **`scrollToHash`** + `scrollIntoView`.
-- **Contrast / accent:** Brighter body text; accent blue limited to links, primary buttons, active nav, icons, and small borders — not decorative eyebrows/status labels.
-- **Copy:** Student standing is **3rd year BSCS** (not final-year / Semester 4).
+- **Hover / type / nav / contrast / 3rd year copy:** See git history of the first implementation pass.
