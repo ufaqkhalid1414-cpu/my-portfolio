@@ -69,6 +69,24 @@ export default async function CaseStudyPage({ params }: PageProps) {
             <h2 className="font-display text-2xl font-semibold uppercase tracking-tight">The Work</h2>
             {isCert ? (
               <div className="mt-8 space-y-12">
+                {wide.length > 0 || primary.length > 0 ? (
+                  <div className="space-y-6">
+                    {wide.map((visual, index) => (
+                      <Reveal key={visual.src} delay={Math.min(index * 0.06, 0.18)}>
+                        <VisualSlot src={visual.src} label={visual.label} wide />
+                      </Reveal>
+                    ))}
+                    {primary.length > 0 ? (
+                      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        {primary.map((visual, index) => (
+                          <Reveal key={visual.src} delay={index * 0.06}>
+                            <VisualSlot src={visual.src} label={visual.label} />
+                          </Reveal>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
                 <div>
                   <p className="mb-4 text-sm text-ink/60">Build sequence</p>
                   <ProcessTimeline />

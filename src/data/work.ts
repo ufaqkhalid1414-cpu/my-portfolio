@@ -35,6 +35,7 @@ export const caseStudies: CaseStudy[] = [
     cover: '/images/smart-campus/login.png?v=6',
     thumbnail: 'image',
     visuals: [
+      { src: '/images/smart-campus/er-diagram.png', label: 'ER diagram (schema)', size: 'wide' },
       { src: '/images/smart-campus/login.png?v=6', label: 'Login', size: 'wide' },
       { src: '/images/smart-campus/student-dashboard.png?v=6', label: 'Student Dashboard', size: 'wide' },
       { src: '/images/smart-campus/dashboard.png?v=10', label: 'Admin Dashboard', size: 'wide' },
@@ -43,7 +44,6 @@ export const caseStudies: CaseStudy[] = [
       { src: '/images/smart-campus/faculty.png?v=6', label: 'Faculty Management', size: 'wide' },
       { src: '/images/smart-campus/departments.png?v=6', label: 'Department Management', size: 'wide' },
       { src: '/images/smart-campus/grades.png?v=7', label: 'Grade Management', size: 'wide' },
-      { src: '/images/smart-campus/er-diagram.png', label: 'Behind the design: ER diagram', size: 'behind' },
     ],
   },
   {
@@ -58,9 +58,21 @@ export const caseStudies: CaseStudy[] = [
       "This project's strength is the engineering process behind it: full requirement analysis, system design, a Work Breakdown Structure, Gantt-chart scheduling, and critical-path planning before development, followed by modular build-out — User Module → Course Module → Quiz Module → Certificate Module → Testing → Deployment. Core system functions specified: registration/authentication, course management, enrollment, learning material access, assessment management, online certification exams, automated certificate generation, and reporting.",
     outcome:
       'A fully specified, buildable system architecture with defined user roles (Administrator, Student), operating environment, and security constraints — the kind of planning discipline that precedes real production software.',
-    cover: undefined,
-    thumbnail: 'timeline',
-    visuals: [],
+    cover: '/images/certification-system/gantt.png',
+    thumbnail: 'image',
+    visuals: [
+      { src: '/images/certification-system/gantt.png', label: 'Gantt schedule', size: 'wide' },
+      {
+        src: '/images/certification-system/module-flow.png',
+        label: 'Module flow',
+        size: 'primary',
+      },
+      {
+        src: '/images/certification-system/graph-activity.png',
+        label: 'Activity graph',
+        size: 'primary',
+      },
+    ],
   },
   {
     slug: 'shadow-warrior',

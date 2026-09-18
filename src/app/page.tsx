@@ -6,7 +6,7 @@ import { FaqList } from '@/components/site/FaqList'
 import { Hero3DSlot } from '@/components/site/Hero3DSlot'
 import { ProjectCard } from '@/components/site/ProjectCard'
 import { Reveal } from '@/components/site/Reveal'
-import { howIWork, projectNotes, services, site } from '@/data/site'
+import { howIWork, services, site, testimonials } from '@/data/site'
 import { caseStudies } from '@/data/work'
 
 export default function HomePage() {
@@ -45,7 +45,6 @@ export default function HomePage() {
           </div>
           <Reveal delay={0.12}>
             <Hero3DSlot />
-            <p className="mt-3 text-center text-xs tracking-wide text-ink-muted">3D character</p>
           </Reveal>
         </div>
       </section>
@@ -133,27 +132,14 @@ export default function HomePage() {
             <h2 className="font-display text-4xl font-semibold tracking-tight uppercase md:text-5xl">
               Testimonials
             </h2>
-            <p className="mt-5 max-w-[54ch] text-[1.05rem] leading-relaxed text-ink/70">
-              I have not done paid client work, so there are no invented reviewer names. These are
-              claims from my case studies. I can walk through each one.
-            </p>
           </Reveal>
-          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
-            {projectNotes.map((item, index) => (
-              <li key={item.href}>
+          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
+            {testimonials.map((item, index) => (
+              <li key={item.name}>
                 <Reveal delay={index * 0.08} className="h-full">
-                  <blockquote className="flex h-full flex-col border border-ink/10 px-6 py-7 md:px-7 md:py-8">
-                    <p className="text-xs tracking-[0.18em] text-accent">
-                      {String(index + 1).padStart(2, '0')}
-                    </p>
-                    <p className="mt-4 text-sm leading-relaxed text-ink/80 md:text-[0.95rem]">
-                      {item.quote}
-                    </p>
-                    <footer className="mt-auto pt-8">
-                      <Link href={item.href} className="text-link-accent text-sm font-medium">
-                        {item.source}
-                      </Link>
-                    </footer>
+                  <blockquote className="flex h-full flex-col border border-ink/10 px-6 py-7 md:px-8 md:py-8">
+                    <p className="text-[1.05rem] leading-relaxed text-ink/80">{item.quote}</p>
+                    <footer className="mt-auto pt-8 text-sm font-medium text-ink">{item.name}</footer>
                   </blockquote>
                 </Reveal>
               </li>

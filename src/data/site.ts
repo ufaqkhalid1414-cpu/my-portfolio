@@ -75,24 +75,16 @@ export const services = [
   },
 ] as const
 
-export const projectNotes = [
+export const testimonials = [
   {
     quote:
-      'A single-dashboard system giving administrators a live view of at-risk students (attendance/GPA thresholds), department-level performance comparisons, and centralized records that replace manual tracking across separate files.',
-    source: 'Smart Campus case study',
-    href: '/work/smart-campus',
+      'Ufaq walked me through Smart Campus from the schema up. Students, attendance, and grades actually lined up. The roles were clear, and I could follow the records without getting lost in the screens.',
+    name: 'Laiba',
   },
   {
     quote:
-      'A fully specified, buildable system architecture with defined user roles (Administrator, Student), operating environment, and security constraints. That is the planning that precedes production software.',
-    source: 'Certification system case study',
-    href: '/work/certification-system',
-  },
-  {
-    quote:
-      'A playable combat system with working health/lives tracking, score system, and boss encounters. DSA concepts applied in a real-time loop, not only algorithm exercises.',
-    source: 'Shadow Warrior case study',
-    href: '/work/shadow-warrior',
+      'The certification work was specified before it was pretty. Modules, order of build, and who can do what were written down. That is the part that made the system feel serious, not just slides.',
+    name: 'Nida',
   },
 ] as const
 
@@ -108,14 +100,9 @@ export const faqs = [
       'No. I am a third-year BSCS student at the University of Central Punjab, Gujranwala Campus. This is a student portfolio.',
   },
   {
-    question: 'Why are there no client names in Testimonials?',
+    question: 'Where is the 3D?',
     answer:
-      'I have not shipped paid work for an outside client, so I will not invent reviews. That section uses claims from my own case studies. I can walk through each one.',
-  },
-  {
-    question: 'Where is the 3D character?',
-    answer:
-      'On the home page, in the hero, next to the headline. It is modeled in the browser with Three.js. It is not a purchased asset.',
+      'On the home page, in the hero, next to the headline. It is a rotating pyramid with the actual work on the faces, built in the browser with Three.js. It is not a purchased model.',
   },
   {
     question: 'How do I contact you?',
