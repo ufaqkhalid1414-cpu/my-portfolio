@@ -6,13 +6,14 @@ import { caseStudies } from '@/data/work'
 export default function WorkIndexPage() {
   return (
     <>
-      <section className="px-5 pt-12 pb-10 md:px-10 md:pt-16">
+      <section className="flex min-h-[36vh] items-end px-5 pb-12 pt-6 md:min-h-[40vh] md:px-10 md:pb-16">
         <div className="mx-auto max-w-[1400px] lg:max-w-[70%]">
-          <Reveal>
-            <h1 className="font-display text-[clamp(3rem,8vw,5.5rem)] font-semibold leading-[0.9] tracking-tight uppercase">
+          <h1
+              id="work-index"
+              className="scroll-mt-28 font-display text-[clamp(3rem,8vw,5.5rem)] font-semibold leading-[0.9] tracking-tight uppercase"
+            >
               Work
             </h1>
-          </Reveal>
           <Reveal delay={0.08}>
             <p className="mt-5 max-w-[42ch] text-ink-muted">
               Three case studies. Each one has its own page.

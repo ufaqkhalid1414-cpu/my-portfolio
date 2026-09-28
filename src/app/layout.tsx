@@ -1,61 +1,59 @@
-import type { Metadata } from 'next'
-import { Great_Vibes, Oswald, Outfit } from 'next/font/google'
-import type { ReactNode } from 'react'
-import { Footer } from '@/components/site/Footer'
-import { Navbar } from '@/components/site/Navbar'
-import { ScrollToHash } from '@/components/site/ScrollToHash'
-import './globals.css'
+import type { Metadata } from "next";
+import { Fraunces, Manrope } from "next/font/google";
+import "./globals.css";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { CursorTrail } from "@/components/CursorTrail";
+import { ScrollProgress } from "@/components/ScrollProgress";
+import { GsapRefresh } from "@/components/GsapRefresh";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-outfit',
-  weight: ['400', '500', '600'],
-})
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+});
 
-const oswald = Oswald({
-  subsets: ['latin'],
-  variable: '--font-oswald',
-  weight: ['500', '600', '700'],
-})
-
-const script = Great_Vibes({
-  subsets: ['latin'],
-  variable: '--font-great-vibes',
-  weight: '400',
-})
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
-  title: 'Ufaq Khalid, software and web developer',
+  title: "Ufaq Khalid | Software Engineer · Full-Stack Builder",
   description:
-    'Portfolio of Ufaq Khalid, a third-year BSCS student building database systems, specified platforms, and applied DSA projects.',
-  openGraph: {
-    title: 'Ufaq Khalid',
-    description:
-      'Database systems, specified platforms, and applied DSA. Third-year BSCS, Gujranwala.',
-    type: 'website',
-    locale: 'en_US',
-    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Ufaq Khalid' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Ufaq Khalid',
-    description:
-      'Database systems, specified platforms, and applied DSA. Third-year BSCS, Gujranwala.',
-    images: ['/og.png'],
-  },
-}
+    "Portfolio of Ufaq Khalid — clean systems, modern web apps, and considered software from coursework to shipped work.",
+};
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+const themeInitScript = `(function(){try{var t=localStorage.getItem('ufaq-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','dark');}}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en">
-      <body
-        className={`${outfit.variable} ${oswald.variable} ${script.variable} font-sans antialiased`}
-      >
-        <Navbar />
-        <ScrollToHash />
-        <main>{children}</main>
-        <Footer />
+    <html
+      lang="en"
+      className={`${fraunces.variable} ${manrope.variable} h-full`}
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className="font-body min-h-full flex flex-col antialiased code-texture text-[var(--text)]">
+        <ThemeProvider>
+          <GsapRefresh />
+          <CursorTrail />
+          <ThemeToggle />
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <ScrollProgress />
+        </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

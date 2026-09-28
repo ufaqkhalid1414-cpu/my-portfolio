@@ -84,16 +84,16 @@ export function ContactForm() {
   return (
     <form ref={formRef} onSubmit={onSubmit} className="grid gap-5" noValidate>
       <div className="grid gap-5 md:grid-cols-2">
-        <Field id="name" label="Name" name="name" autoComplete="name" />
-        <Field id="email" label="Email" name="email" type="email" autoComplete="email" />
+        <Field id="contact-name" label="Name" name="name" autoComplete="name" />
+        <Field id="contact-email" label="Email" name="email" type="email" autoComplete="email" />
       </div>
       <Field id="subject" label="Subject" name="subject" />
       <div className="grid gap-2">
-        <label htmlFor="message" className="text-sm font-medium text-ink">
+        <label htmlFor="contact-message" className="text-sm font-medium text-ink">
           Message
         </label>
         <textarea
-          id="message"
+          id="contact-message"
           name="message"
           rows={6}
           required

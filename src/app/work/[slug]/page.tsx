@@ -29,15 +29,13 @@ export default async function CaseStudyPage({ params }: PageProps) {
 
   return (
     <>
-      <section className="px-5 pt-12 pb-10 md:px-10 md:pt-16">
-        <div className="mx-auto grid max-w-[1400px] gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-end">
-          <Reveal>
-            <h1 className="font-display text-[clamp(2.8rem,7vw,5.2rem)] font-semibold leading-[0.9] tracking-tight uppercase">
-              {project.title}
-            </h1>
-          </Reveal>
+      <section className="px-5 pb-10 pt-8 md:px-10 md:pb-14">
+        <div className="mx-auto max-w-[1400px]">
+          <h1 className="max-w-[18ch] font-display text-[clamp(2.4rem,8vw,5.2rem)] font-semibold leading-[0.9] tracking-tight uppercase">
+            {project.title}
+          </h1>
           <Reveal delay={0.08}>
-            <p className="max-w-[40ch] text-lg leading-relaxed text-ink-muted lg:justify-self-end">
+            <p className="mt-6 max-w-[46ch] text-lg leading-relaxed text-ink-muted">
               {project.tagline}
             </p>
           </Reveal>
@@ -69,24 +67,6 @@ export default async function CaseStudyPage({ params }: PageProps) {
             <h2 className="font-display text-2xl font-semibold uppercase tracking-tight">The Work</h2>
             {isCert ? (
               <div className="mt-8 space-y-12">
-                {wide.length > 0 || primary.length > 0 ? (
-                  <div className="space-y-6">
-                    {wide.map((visual, index) => (
-                      <Reveal key={visual.src} delay={Math.min(index * 0.06, 0.18)}>
-                        <VisualSlot src={visual.src} label={visual.label} wide />
-                      </Reveal>
-                    ))}
-                    {primary.length > 0 ? (
-                      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                        {primary.map((visual, index) => (
-                          <Reveal key={visual.src} delay={index * 0.06}>
-                            <VisualSlot src={visual.src} label={visual.label} />
-                          </Reveal>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                ) : null}
                 <div>
                   <p className="mb-4 text-sm text-ink/60">Build sequence</p>
                   <ProcessTimeline />

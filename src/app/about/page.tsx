@@ -7,13 +7,14 @@ const tools = ['HTML', 'CSS', 'JavaScript', 'PHP', 'MySQL', 'C++', 'Unity (C#)']
 export default function AboutPage() {
   return (
     <>
-      <section className="px-5 pt-12 pb-16 md:px-10 md:pt-16">
-        <div className="mx-auto max-w-[1400px]">
-          <Reveal>
-            <h1 className="font-display text-[clamp(3rem,8vw,5.5rem)] font-semibold leading-[0.9] tracking-tight uppercase">
+      <section className="flex min-h-[36vh] items-end px-5 pb-12 pt-6 md:min-h-[40vh] md:px-10 md:pb-16">
+        <div className="mx-auto w-full max-w-[1400px]">
+            <h1
+              id="about"
+              className="scroll-mt-28 font-display text-[clamp(3rem,8vw,5.5rem)] font-semibold leading-[0.9] tracking-tight uppercase"
+            >
               About
             </h1>
-          </Reveal>
           <Reveal delay={0.08}>
             <dl className="mt-10 grid max-w-3xl grid-cols-2 gap-x-10 gap-y-6 text-sm md:grid-cols-4">
               <div>

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { HashLink } from '@/components/site/HashLink'
 import { navLinks, site } from '@/data/site'
 
 export function Navbar() {
@@ -21,9 +22,18 @@ export function Navbar() {
 
         <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
           {navLinks.map((link) => {
+            const path = link.href.split('#')[0]
             const active =
-              pathname === link.href || (link.href === '/work' && pathname.startsWith('/work'))
-            return (
+              pathname === path || (path === '/work' && pathname.startsWith('/work'))
+            return path.includes('#') || link.href.includes('#') ? (
+              <HashLink
+                key={link.href}
+                href={link.href}
+                className={`nav-link text-sm tracking-wide ${active ? 'is-active' : ''}`}
+              >
+                {link.label}
+              </HashLink>
+            ) : (
               <Link
                 key={link.href}
                 href={link.href}
@@ -36,12 +46,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <Link
-            href="/contact"
+          <a
+            href="/contact#contact"
             className="btn-accent rounded-full px-5 py-2 text-sm font-medium"
           >
             {site.cta}
-          </Link>
+          </a>
           <button
             type="button"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-cream/20 lg:hidden"
@@ -63,16 +73,34 @@ export function Navbar() {
       {open ? (
         <div id="mobile-nav" className="border-t border-cream/10 bg-ink px-5 py-4 lg:hidden">
           <nav className="flex flex-col gap-3" aria-label="Mobile">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="nav-link py-1"
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) =>
+              link.href.includes('#') ? (
+                <HashLink
+                  key={link.href}
+                  href={link.href}
+                  className="nav-link py-1"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </HashLink>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="nav-link py-1"
+                  onClick={() => setOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
+            <HashLink
+              href="/contact#contact"
+              className="nav-link py-1"
+              onClick={() => setOpen(false)}
+            >
+              {site.cta}
+            </HashLink>
           </nav>
         </div>
       ) : null}

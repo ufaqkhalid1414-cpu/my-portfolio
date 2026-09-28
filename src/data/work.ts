@@ -37,8 +37,8 @@ export const caseStudies: CaseStudy[] = [
     visuals: [
       { src: '/images/smart-campus/er-diagram.png', label: 'ER diagram (schema)', size: 'wide' },
       { src: '/images/smart-campus/login.png?v=6', label: 'Login', size: 'wide' },
-      { src: '/images/smart-campus/student-dashboard.png?v=6', label: 'Student Dashboard', size: 'wide' },
-      { src: '/images/smart-campus/dashboard.png?v=10', label: 'Admin Dashboard', size: 'wide' },
+      { src: '/images/smart-campus/student-dashboard.png?v=12', label: 'Student Dashboard', size: 'wide' },
+      { src: '/images/smart-campus/dashboard.png?v=12', label: 'Admin Dashboard', size: 'wide' },
       { src: '/images/smart-campus/course-management.png?v=6', label: 'Course Management', size: 'wide' },
       { src: '/images/smart-campus/students.png?v=6', label: 'Student Management', size: 'wide' },
       { src: '/images/smart-campus/faculty.png?v=6', label: 'Faculty Management', size: 'wide' },
@@ -58,21 +58,9 @@ export const caseStudies: CaseStudy[] = [
       "This project's strength is the engineering process behind it: full requirement analysis, system design, a Work Breakdown Structure, Gantt-chart scheduling, and critical-path planning before development, followed by modular build-out — User Module → Course Module → Quiz Module → Certificate Module → Testing → Deployment. Core system functions specified: registration/authentication, course management, enrollment, learning material access, assessment management, online certification exams, automated certificate generation, and reporting.",
     outcome:
       'A fully specified, buildable system architecture with defined user roles (Administrator, Student), operating environment, and security constraints — the kind of planning discipline that precedes real production software.',
-    cover: '/images/certification-system/gantt.png',
-    thumbnail: 'image',
-    visuals: [
-      { src: '/images/certification-system/gantt.png', label: 'Gantt schedule', size: 'wide' },
-      {
-        src: '/images/certification-system/module-flow.png',
-        label: 'Module flow',
-        size: 'primary',
-      },
-      {
-        src: '/images/certification-system/graph-activity.png',
-        label: 'Activity graph',
-        size: 'primary',
-      },
-    ],
+    cover: undefined,
+    thumbnail: 'timeline',
+    visuals: [],
   },
   {
     slug: 'shadow-warrior',
@@ -86,11 +74,11 @@ export const caseStudies: CaseStudy[] = [
       'Built in Unity (C#) using a component-based architecture — separate Player, Enemy, and Manager scripts, each handling one responsibility. Boss and enemy behavior runs on a finite state machine (Patrol → Chase → Attack → Staggered), with distance-based decision-making driving melee, ranged, and AOE attack choices. Health, lives, and score are tracked through an event-driven trigger system (OnTriggerEnter2D for hits and pickups), with Unity\'s physics engine (Rigidbody2D) handling movement and collision.',
     outcome:
       'A playable combat system with working health/lives tracking, score system, and boss encounters — demonstrating DSA concepts applied in a real-time, interactive context rather than just algorithm exercises.',
-    cover: '/images/shadow-warrior/combat.png',
+    cover: '/images/shadow-warrior/combat.png?v=2',
     thumbnail: 'image',
     visuals: [
-      { src: '/images/shadow-warrior/combat.png', label: 'Combat scene', size: 'primary' },
-      { src: '/images/shadow-warrior/boss-encounter.png', label: 'Boss encounter', size: 'primary' },
+      { src: '/images/shadow-warrior/combat.png?v=2', label: 'Combat scene', size: 'primary' },
+      { src: '/images/shadow-warrior/boss-encounter.png?v=2', label: 'Boss encounter', size: 'primary' },
     ],
   },
 ]

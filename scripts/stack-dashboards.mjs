@@ -216,6 +216,24 @@ async function trimPageGray(buf) {
     .toBuffer()
 }
 
+async function pageGrayToWhite(buf) {
+  const { data, info } = await sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true })
+  const { width, height } = info
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i]
+    const g = data[i + 1]
+    const b = data[i + 2]
+    const avg = (r + g + b) / 3
+    const sat = Math.max(r, g, b) - Math.min(r, g, b)
+    if (sat < 24 && avg > 198) {
+      data[i] = 255
+      data[i + 1] = 255
+      data[i + 2] = 255
+    }
+  }
+  return sharp(data, { raw: { width, height, channels: 4 } }).png().toBuffer()
+}
+
 async function unifyEqualStack(bufs, width) {
   const parts = []
   for (const buf of bufs) {
@@ -264,7 +282,7 @@ async function stackVertical(buffers) {
       width,
       height: y,
       channels: 3,
-      background: { r: 238, g: 242, b: 246 },
+      background: { r: 255, g: 255, b: 255 },
     },
   })
     .composite(composite)
@@ -327,7 +345,7 @@ const student = await stackVertical([
   await contentPane(join(srcDir, 'Screenshot 2026-07-11 204446.png'), { trimTop: 210, trimBottom: 150 }),
   await contentPane(join(srcDir, 'Screenshot 2026-07-11 204505.png'), { trimTop: 95 }),
 ])
-await student.toFile(join(destDir, 'student-dashboard.png'))
+await sharp(await pageGrayToWhite(await student.png().toBuffer())).toFile(join(destDir, 'student-dashboard.png'))
 
 const adminStats = await contentPane(join(srcDir, 'Screenshot 2026-07-11 201808.png'), { trimBottom: 24 })
 const summaryCards = await splitPageCards(
@@ -345,7 +363,7 @@ const chartColumn = await unifyEqualStack(
   adminWidth,
 )
 const admin = await stackVertical([adminStats, chartColumn])
-await admin.toFile(join(destDir, 'dashboard.png'))
+await sharp(await pageGrayToWhite(await admin.png().toBuffer())).toFile(join(destDir, 'dashboard.png'))
 
 const loginBox = await loginCrop(join(srcDir, 'Screenshot 2026-07-11 204315.png'))
 await sharp(join(srcDir, 'Screenshot 2026-07-11 204315.png'))

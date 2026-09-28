@@ -13,8 +13,8 @@ import {
 } from 'three'
 
 const FACE_IMAGES = [
-  '/images/smart-campus/dashboard.png?v=10',
-  '/images/shadow-warrior/combat.png',
+  '/images/smart-campus/dashboard.png?v=12',
+  '/images/shadow-warrior/combat.png?v=2',
 ]
 
 function createPyramidGeometry() {

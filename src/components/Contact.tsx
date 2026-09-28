@@ -1,98 +1,145 @@
-'use client'
+"use client";
 
-import { useState, type FormEvent } from 'react'
-import { HiOutlineLocationMarker, HiOutlineMail, HiOutlinePhone } from 'react-icons/hi'
-import { profile } from '../data/profile'
-import { GlassCard } from './GlassCard'
-import { Section } from './Section'
+import { FormEvent, useRef, useState } from "react";
+import { site } from "@/data/content";
+import { SectionHeading } from "./SectionHeading";
+import { useStaggerReveal } from "@/hooks/useStaggerReveal";
+import { useTheme } from "./ThemeProvider";
 
 export function Contact() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [message, setMessage] = useState('')
+  const [status, setStatus] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
+  const { theme, ready } = useTheme();
+  useStaggerReveal(formRef, ".js-reveal", { y: 24, stagger: 0.08 });
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const subject = encodeURIComponent(`Portfolio inquiry from ${name || 'visitor'}`)
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`,
-    )
-    window.location.href = `mailto:${profile.email}?subject=${subject}&body=${body}`
+  const accent = ready && theme === "light" ? "amber" : "teal";
+
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") || "");
+    const email = String(data.get("email") || "");
+    const type = String(data.get("type") || "");
+    const message = String(data.get("message") || "");
+    const text = `Hi Ufaq, I'm ${name}. (${email}) Project: ${type}. ${message}`;
+    const phone = site.whatsapp.replace(/\D/g, "");
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, "_blank");
+    setStatus("Opening WhatsApp with your message…");
   }
 
   return (
-    <Section id="contact" eyebrow="Let's talk" title="Contact" className="contact-section">
-      <div className="contact-glow" aria-hidden="true" />
-      <div className="contact-shell">
-        <div className="contact-grid">
-          <GlassCard className="contact-details" hover={false}>
-            <p>Reach me directly or send a short message.</p>
-            <ul className="contact-list">
+    <section
+      id="contact"
+      className={`relative section-pad ${
+        accent === "amber" ? "aurora-amber" : "aurora-teal"
+      }`}
+    >
+      <div className="container-x">
+        <SectionHeading
+          eyebrow="Contact"
+          title="Have a project in mind"
+          accent={accent}
+        />
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-start">
+          <div className="text-center lg:text-left">
+            <p className="text-[var(--muted)] leading-relaxed max-w-md mx-auto lg:mx-0">
+              Tell me what you want to build. I’ll reply with a clear next step —
+              scope, timeline, and whether I’m the right fit.
+            </p>
+            <ul className="mt-8 space-y-3 text-sm">
               <li>
-                <span>Email</span>
-                <a className="contact-pill card-hover" href={`mailto:${profile.email}`}>
-                  <HiOutlineMail aria-hidden="true" />
-                  {profile.email}
+                <span className="text-[var(--muted)]">Email · </span>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="text-[var(--contact-accent)] hover:underline"
+                >
+                  {site.email}
                 </a>
               </li>
               <li>
-                <span>Phone</span>
-                <a className="contact-pill card-hover" href={profile.phoneHref}>
-                  <HiOutlinePhone aria-hidden="true" />
-                  {profile.phone}
+                <span className="text-[var(--muted)]">Phone · </span>
+                <a
+                  href={`tel:${site.phoneTel}`}
+                  className="text-[var(--contact-accent)] hover:underline"
+                >
+                  {site.phone}
                 </a>
               </li>
               <li>
-                <span>Location</span>
-                <p className="contact-pill contact-pill--static card-hover">
-                  <HiOutlineLocationMarker aria-hidden="true" />
-                  {profile.location}
-                </p>
+                <span className="text-[var(--muted)]">WhatsApp · </span>
+                <a
+                  href={`https://wa.me/${site.whatsapp.replace(/\D/g, "")}`}
+                  className="text-[var(--contact-accent)] hover:underline"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {site.whatsapp}
+                </a>
               </li>
             </ul>
-          </GlassCard>
+          </div>
 
-          <GlassCard className="contact-form-card" hover={false}>
-            <form className="contact-form" onSubmit={onSubmit}>
-              <label>
+          <form
+            ref={formRef}
+            onSubmit={onSubmit}
+            className="glass-strong rounded-3xl p-6 md:p-8 space-y-4"
+          >
+            <div className="js-reveal">
+              <label className="text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
                 Name
-                <input
-                  type="text"
-                  name="name"
-                  autoComplete="name"
-                  value={name}
-                  onChange={(event) => setName(event.target.value)}
-                  required
-                />
               </label>
-              <label>
+              <input
+                name="name"
+                required
+                className="mt-2 w-full rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] px-4 py-3 text-[var(--text)] outline-none focus:border-[var(--contact-accent-soft)]"
+                placeholder="Your name"
+              />
+            </div>
+            <div className="js-reveal">
+              <label className="text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
                 Email
-                <input
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  required
-                />
               </label>
-              <label>
+              <input
+                name="email"
+                type="email"
+                required
+                className="mt-2 w-full rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] px-4 py-3 text-[var(--text)] outline-none focus:border-[var(--contact-accent-soft)]"
+                placeholder="you@email.com"
+              />
+            </div>
+            <div className="js-reveal">
+              <label className="text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
+                Project type
+              </label>
+              <input
+                name="type"
+                className="mt-2 w-full rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] px-4 py-3 text-[var(--text)] outline-none focus:border-[var(--contact-accent-soft)]"
+                placeholder="Web app / DBMS / Game / Other"
+              />
+            </div>
+            <div className="js-reveal">
+              <label className="text-xs uppercase tracking-[0.14em] text-[var(--muted)]">
                 Message
-                <textarea
-                  name="message"
-                  rows={5}
-                  value={message}
-                  onChange={(event) => setMessage(event.target.value)}
-                  required
-                />
               </label>
-              <button className="btn btn-primary" type="submit">
-                Send message
+              <textarea
+                name="message"
+                required
+                rows={4}
+                className="mt-2 w-full rounded-xl border border-[var(--surface-border)] bg-[var(--surface)] px-4 py-3 text-[var(--text)] outline-none focus:border-[var(--contact-accent-soft)] resize-y"
+                placeholder="What are we building?"
+              />
+            </div>
+            <div className="js-reveal">
+              <button type="submit" className="btn-whatsapp w-full sm:w-auto">
+                Send via WhatsApp
               </button>
-            </form>
-          </GlassCard>
+            </div>
+            {status && (
+              <p className="text-sm text-[var(--contact-accent)]">{status}</p>
+            )}
+          </form>
         </div>
       </div>
-    </Section>
-  )
+    </section>
+  );
 }

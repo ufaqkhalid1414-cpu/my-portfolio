@@ -29,7 +29,7 @@ export function ProjectCard({
       className="project-card h-full overflow-hidden rounded-[28px] bg-cream-deep"
     >
       <Link href={href} className="group flex h-full flex-col">
-        <div className="aspect-[16/10] shrink-0 overflow-hidden bg-[#d9d2c2]">
+        <div className="aspect-[16/10] shrink-0 overflow-hidden bg-cream">
           {thumbnail === 'timeline' ? (
             <div className="card-media h-full origin-center">
               <ProcessTimeline compact />
@@ -38,7 +38,7 @@ export function ProjectCard({
             <img
               src={image}
               alt={title}
-              className="h-full w-full object-cover object-top"
+              className="h-full w-full object-contain object-center"
             />
           ) : null}
         </div>

@@ -30,9 +30,9 @@ export function whatsappHref(message?: string) {
 
 export const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/work', label: 'Work' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/work#work-index', label: 'Work' },
+  { href: '/about#about', label: 'About' },
+  { href: '/contact#contact', label: 'Contact' },
 ] as const
 
 export const headlineOptions = [

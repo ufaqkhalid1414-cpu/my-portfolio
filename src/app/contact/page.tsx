@@ -6,13 +6,14 @@ import { site } from '@/data/site'
 export default function ContactPage() {
   return (
     <>
-      <section className="px-5 pt-12 pb-10 md:px-10 md:pt-16">
-        <div className="mx-auto max-w-[1400px]">
-          <Reveal>
-            <h1 className="font-display text-[clamp(3.4rem,10vw,6.5rem)] font-semibold leading-[0.88] tracking-tight uppercase">
+      <section className="flex min-h-[36vh] items-end px-5 pb-12 pt-6 md:min-h-[40vh] md:px-10 md:pb-16">
+        <div className="mx-auto w-full max-w-[1400px]">
+            <h1
+              id="contact"
+              className="scroll-mt-28 font-display text-[clamp(3.4rem,10vw,6.5rem)] font-semibold leading-[0.88] tracking-tight uppercase"
+            >
               Contact
             </h1>
-          </Reveal>
           <Reveal delay={0.08}>
             <p className="mt-5 max-w-[42ch] text-ink-muted">
               Email stays. WhatsApp opens a chat to me with what you typed. I reply within a day if I
