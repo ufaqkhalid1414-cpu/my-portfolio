@@ -4,24 +4,15 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollToPlugin, SplitText);
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollToPlugin);
 
-export { gsap, useGSAP, ScrollTrigger, ScrollToPlugin, SplitText };
+export { gsap, useGSAP, ScrollTrigger, ScrollToPlugin };
 
-/** Word-split with mask; falls back to a lightweight helper if SplitText fails. */
+/** Word-split with overflow mask (free helper — no Club SplitText). */
 export function splitWordsMasked(el: HTMLElement) {
-  try {
-    return SplitText.create(el, { type: "words", mask: "words" });
-  } catch {
-    return splitWordsFallback(el);
-  }
-}
-
-function splitWordsFallback(el: HTMLElement) {
   const text = el.textContent ?? "";
-  const words = text.trim().split(/\s+/);
+  const words = text.trim().split(/\s+/).filter(Boolean);
   el.textContent = "";
   const wordEls: HTMLElement[] = [];
   words.forEach((word, i) => {
