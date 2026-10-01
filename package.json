@@ -1,0 +1,38 @@
+{
+  "name": "ufaq-portfolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "docs:pdf": "node scripts/generate-docs-pdf.js",
+    "docs:design-sheet": "node scripts/generate-design-sheet-pdf.js",
+    "docs:prd": "node scripts/generate-prd-pdf.js"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.1",
+    "@types/three": "^0.186.0",
+    "framer-motion": "^13.4.4",
+    "gsap": "^3.15.0",
+    "next": "16.3.6",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.19.43",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "pdfkit": "^0.20.2",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
