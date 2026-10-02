@@ -9,6 +9,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 const loopItems = [...testimonials, ...testimonials];
 
 export function Testimonials() {
+  // This component shows testimonial cards with scroll-in animation, floating motion, and a looping marquee.
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -17,6 +18,7 @@ export function Testimonials() {
 
   useGSAP(
     () => {
+      // This animation setup reveals the cards on scroll and starts the floating and marquee motion.
       const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
       const track = trackRef.current;
       if (!cards.length || !sectionRef.current || !track) return;
@@ -24,6 +26,7 @@ export function Testimonials() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        // This branch shows all testimonial cards immediately without motion.
         gsap.set(cards, {
           clearProps: "transform,opacity",
           opacity: 1,
@@ -35,6 +38,7 @@ export function Testimonials() {
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // This branch animates the cards in and then starts the endless horizontal marquee.
         gsap.set(cards, { opacity: 0, y: 48, scale: 0.9 });
 
         const tl = gsap.timeline({
@@ -95,6 +99,7 @@ export function Testimonials() {
       });
 
       return () => {
+        // This cleanup stops all looping testimonial animations when the section unmounts.
         floatTweens.current.forEach((t) => t.kill());
         floatTweens.current = [];
         marqueeTween.current?.kill();
@@ -106,6 +111,7 @@ export function Testimonials() {
   );
 
   function setMotionPaused(next: boolean) {
+    // This helper pauses or resumes the floating and marquee motion during hover or touch.
     floatTweens.current.forEach((t) => {
       if (!t) return;
       if (next) t.pause();

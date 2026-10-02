@@ -8,13 +8,16 @@ const SECTION_RE = /^(home|about|skills|services|work|testimonials|faq|contact)$
 
 /** Scroll to hash after navigating to `/#section` (precise land on heading). */
 export function ScrollToHash() {
+  // This helper watches the URL hash on page load and scrolls to the right section.
   useEffect(() => {
+    // This effect waits for the page to settle, then performs the initial hash-based scroll.
     if (typeof window === "undefined") return;
     window.history.scrollRestoration = "manual";
 
     let cancelled = false;
 
     async function go() {
+      // This function restores the correct section position after fonts and layout have loaded.
       try {
         await document.fonts.ready;
       } catch {

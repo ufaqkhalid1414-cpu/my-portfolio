@@ -21,6 +21,7 @@ export function SectionHeading({
   className?: string;
   subtitle?: string;
 }) {
+  // This component renders a reusable section heading with title animation and optional subtitle reveal.
   const rootRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
@@ -28,6 +29,7 @@ export function SectionHeading({
 
   useGSAP(
     () => {
+      // This animation setup fades the eyebrow and subtitle in when the heading scrolls into view.
       const root = rootRef.current;
       const eyebrowEl = eyebrowRef.current;
       if (!root || !eyebrowEl) return;
@@ -35,6 +37,7 @@ export function SectionHeading({
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        // This branch shows the heading text without animation when reduced motion is preferred.
         gsap.set([eyebrowEl, subtitleRef.current].filter(Boolean), {
           clearProps: "all",
           opacity: 1,
@@ -43,6 +46,7 @@ export function SectionHeading({
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // This branch animates the eyebrow and subtitle with a gentle upward reveal.
         gsap.set(eyebrowEl, { opacity: 0, y: 12 });
         if (subtitleRef.current) {
           gsap.set(subtitleRef.current, { opacity: 0, y: 16 });

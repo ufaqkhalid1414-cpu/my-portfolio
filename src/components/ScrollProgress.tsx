@@ -4,10 +4,12 @@ import { useRef } from "react";
 import { gsap, useGSAP, ScrollToPlugin } from "@/lib/gsap";
 
 export function ScrollProgress() {
+  // This component shows a back-to-top button with a ring that fills as the page scrolls.
   const btnRef = useRef<HTMLButtonElement>(null);
   const ringRef = useRef<SVGCircleElement>(null);
 
   useGSAP(() => {
+    // This animation setup reveals the button after the hero and updates the progress ring during scrolling.
     const btn = btnRef.current;
     const ring = ringRef.current;
     if (!btn || !ring) return;
@@ -20,11 +22,13 @@ export function ScrollProgress() {
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: reduce)", () => {
+      // This branch shows the button and full ring without motion when reduced motion is preferred.
       gsap.set(btn, { autoAlpha: 1, scale: 1 });
       gsap.set(ring, { strokeDashoffset: 0 });
     });
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
+      // This branch fades the button in and ties the ring fill to the scroll position.
       gsap.to(btn, {
         autoAlpha: 1,
         scale: 1,
@@ -52,6 +56,7 @@ export function ScrollProgress() {
   }, { scope: btnRef });
 
   function scrollTop() {
+    // This click handler smoothly scrolls the page back to the top.
     gsap.to(window, {
       scrollTo: { y: 0, autoKill: true },
       duration: 1,

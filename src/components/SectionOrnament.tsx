@@ -19,6 +19,7 @@ export function SectionOrnament({
   accent?: Accent;
   className?: string;
 }) {
+  // This component draws the curved line ornament and animates its stroke and end dot on scroll.
   const rootRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const dotRef = useRef<SVGCircleElement>(null);
@@ -28,6 +29,7 @@ export function SectionOrnament({
 
   useGSAP(
     () => {
+      // This animation setup reveals the ornament line when the heading area scrolls into view.
       const root = rootRef.current;
       const path = pathRef.current;
       const dot = dotRef.current;
@@ -36,11 +38,13 @@ export function SectionOrnament({
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        // This branch shows the ornament fully drawn when reduced motion is preferred.
         gsap.set(path, { strokeDashoffset: 0 });
         gsap.set(dot, { scale: 1, transformOrigin: "center" });
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // This branch animates the line drawing first and then pops in the glowing dot.
         const len = path.getTotalLength();
         gsap.set(path, {
           strokeDasharray: len,

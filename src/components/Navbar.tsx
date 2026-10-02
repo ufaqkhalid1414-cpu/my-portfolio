@@ -7,6 +7,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
 export function Navbar() {
+  // This component renders the sticky navbar, handles section clicks, and animates the bar on scroll.
   const [open, setOpen] = useState(false);
   const { active, navigateTo, toRootHref } = useActiveSection();
   const headerRef = useRef<HTMLElement>(null);
@@ -16,6 +17,7 @@ export function Navbar() {
 
   useGSAP(
     () => {
+      // This animation setup shrinks the navbar after the user scrolls down and restores it near the top.
       const pill = pillRef.current;
       const nav = navRef.current;
       const contact = contactRef.current;
@@ -24,7 +26,9 @@ export function Navbar() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // This branch enables the navbar scroll animation only when motion is allowed.
         const shrink = () => {
+          // This function animates the navbar into its smaller scrolled state.
           pill.classList.add("is-scrolled");
           gsap.to(pill, {
             paddingTop: 6,
@@ -60,6 +64,7 @@ export function Navbar() {
         };
 
         const expand = () => {
+          // This function returns the navbar to its larger default state near the top of the page.
           pill.classList.remove("is-scrolled");
           gsap.to(pill, {
             paddingTop: 8,
@@ -113,6 +118,7 @@ export function Navbar() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) {
+    // This click handler closes the mobile menu and smooth-scrolls to the chosen section.
     e.preventDefault();
     setOpen(false);
     navigateTo(href);

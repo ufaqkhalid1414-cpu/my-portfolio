@@ -7,6 +7,7 @@ import { Navbar } from "./Navbar";
 import { SectionLink } from "./SectionLink";
 
 export function Hero() {
+  // This component renders the hero section, plays its entrance animation, and handles the sound toggle.
   const sectionRef = useRef<HTMLElement>(null);
   const audioRef = useRef<HTMLVideoElement>(null);
   const pillRef = useRef<HTMLDivElement>(null);
@@ -20,6 +21,7 @@ export function Hero() {
 
   useGSAP(
     () => {
+      // This animation setup reveals the hero text, buttons, and scroll cue when the page loads.
       const section = sectionRef.current;
       const title = titleRef.current;
       if (!section || !title) return;
@@ -27,6 +29,7 @@ export function Hero() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        // This branch shows the hero content instantly when reduced motion is preferred.
         gsap.set(
           [
             pillRef.current,
@@ -41,6 +44,7 @@ export function Hero() {
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // This branch animates the hero content with masked title words and staggered fades.
         const split = splitWordsMasked(title);
 
         gsap.set(pillRef.current, { opacity: 0, y: 16 });
@@ -93,6 +97,7 @@ export function Hero() {
         }
 
         return () => {
+          // This cleanup restores the original title text after the split-word animation helper runs.
           split.revert?.();
         };
       });
@@ -103,6 +108,7 @@ export function Hero() {
   );
 
   function toggleMute() {
+    // This click handler toggles the background audio between muted and unmuted states.
     const audio = audioRef.current;
     if (!audio) return;
     const next = !muted;

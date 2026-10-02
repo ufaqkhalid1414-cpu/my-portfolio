@@ -17,17 +17,20 @@ const SECTION_IDS = [
 export type SectionId = (typeof SECTION_IDS)[number];
 
 function toHash(href: string) {
+  // This helper converts different link formats into a normal #section hash.
   if (href.startsWith("/#")) return href.slice(1);
   if (href.startsWith("#")) return href;
   return `#${href}`;
 }
 
 function toRootHref(href: string) {
+  // This helper builds a home-page URL with the matching section hash.
   const hash = toHash(href);
   return `/${hash}`;
 }
 
 export function useActiveSection() {
+  // This hook tracks the current section and provides smooth navigation between sections.
   const pathname = usePathname();
   const router = useRouter();
   const [active, setActive] = useState<`#${SectionId}`>("#home");
@@ -36,6 +39,7 @@ export function useActiveSection() {
   const rafRef = useRef(0);
 
   const compute = useCallback(() => {
+    // This function checks the scroll position and updates which section is active in the navbar.
     if (lockedRef.current) return;
 
     if (pathname?.startsWith("/projects")) {
@@ -74,6 +78,7 @@ export function useActiveSection() {
 
   useEffect(() => {
     const onScroll = () => {
+      // This handler batches scroll and resize updates so active-section checks stay smooth.
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = 0;
@@ -94,6 +99,7 @@ export function useActiveSection() {
 
   const navigateTo = useCallback(
     (href: string) => {
+      // This function navigates to a section, either by scrolling on the page or routing back to home first.
       const hash = toHash(href) as `#${SectionId}` | "#contact";
       const id = hash.replace("#", "");
       const rootHref = toRootHref(href);
@@ -124,11 +130,13 @@ export function useActiveSection() {
       if (lockTimer.current) clearTimeout(lockTimer.current);
 
       const unlock = () => {
+        // This helper re-enables automatic active-section tracking after manual navigation finishes.
         lockedRef.current = false;
         compute();
       };
 
       const onScrollEnd = () => {
+        // This handler unlocks section tracking when the smooth scroll finishes.
         window.removeEventListener("scrollend", onScrollEnd);
         unlock();
       };

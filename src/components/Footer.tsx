@@ -8,9 +8,11 @@ import { useStaggerReveal } from "@/hooks/useStaggerReveal";
 import { SectionLink } from "./SectionLink";
 
 function LocalTimePKT() {
+  // This component shows the current Pakistan time and updates it every minute.
   const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
+    // This effect formats the time now and keeps it fresh with a repeating timer.
     const format = () =>
       new Intl.DateTimeFormat("en-US", {
         timeZone: "Asia/Karachi",
@@ -40,6 +42,7 @@ function LocalTimePKT() {
 }
 
 export function Footer() {
+  // This component renders the footer, its reveal animations, and the copy-email action.
   const footerRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLDivElement>(null);
@@ -51,6 +54,7 @@ export function Footer() {
 
   /* Project pages: layout footer persists — restore visibility after client nav. */
   useEffect(() => {
+    // This effect resets footer reveal styles after navigating between project pages.
     if (!pathname.startsWith("/projects")) return;
     const grid = gridRef.current;
     const word = wordRef.current;
@@ -70,6 +74,7 @@ export function Footer() {
 
   useGSAP(
     () => {
+      // This animation setup reveals the footer wordmark and adds a hover glow that follows the mouse.
       const word = wordRef.current;
       const glow = glowRef.current;
       if (!word || !footerRef.current) return;
@@ -77,10 +82,12 @@ export function Footer() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        // This branch shows the footer wordmark without motion when reduced motion is preferred.
         gsap.set(word, { clearProps: "transform,opacity", opacity: 1, y: 0 });
       });
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
+        // This branch animates the wordmark in and enables the moving glow hover effect.
         gsap.fromTo(
           word,
           { y: 40, opacity: 0.35 },
@@ -101,6 +108,7 @@ export function Footer() {
           const qx = gsap.quickTo(glow, "x", { duration: 0.6, ease: "power3.out" });
           const qy = gsap.quickTo(glow, "y", { duration: 0.6, ease: "power3.out" });
           const onMove = (e: MouseEvent) => {
+            // This mouse handler moves the footer glow toward the cursor position.
             const rect = footerRef.current!.getBoundingClientRect();
             qx(e.clientX - rect.left - rect.width / 2);
             qy(e.clientY - rect.top - rect.height / 2);
@@ -116,6 +124,7 @@ export function Footer() {
   );
 
   async function copyEmail() {
+    // This click handler copies the email address and briefly shows a copied state.
     try {
       await navigator.clipboard.writeText(site.email);
       setCopied(true);

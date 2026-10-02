@@ -11,6 +11,7 @@ export { gsap, useGSAP, ScrollTrigger, ScrollToPlugin };
 
 /** Word-split with overflow mask (free helper — no Club SplitText). */
 export function splitWordsMasked(el: HTMLElement) {
+  // This helper wraps each word so headings can animate upward behind a mask.
   const text = el.textContent ?? "";
   const words = text.trim().split(/\s+/).filter(Boolean);
   el.textContent = "";
@@ -31,11 +32,13 @@ export function splitWordsMasked(el: HTMLElement) {
   return {
     words: wordEls,
     revert() {
+      // This helper restores the original plain text after the split-word animation is done.
       el.textContent = text;
     },
   };
 }
 
 export function refreshScrollTriggers() {
+  // This helper tells GSAP to recalculate scroll trigger positions after layout changes.
   ScrollTrigger.refresh();
 }

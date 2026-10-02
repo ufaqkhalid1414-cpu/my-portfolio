@@ -7,6 +7,7 @@ import { AnimatedHeading } from "./AnimatedHeading";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 
 export function About() {
+  // This component renders the About section and animates its process steps as the user scrolls.
   const sectionRef = useRef<HTMLElement>(null);
   const stepsRef = useRef<(HTMLLIElement | null)[]>([]);
   const dotsRef = useRef<(HTMLButtonElement | null)[]>([]);
@@ -15,6 +16,7 @@ export function About() {
 
   useGSAP(
     () => {
+      // This animation setup handles different About section scroll effects for reduced motion, mobile, and desktop.
       const section = sectionRef.current;
       if (!section) return;
       const steps = stepsRef.current.filter(Boolean) as HTMLLIElement[];
@@ -23,6 +25,7 @@ export function About() {
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        // This branch removes motion and shows every process step in a readable static state.
         gsap.set(steps, { clearProps: "all", opacity: 1, x: 0 });
         steps.forEach((step) => {
           const num = step.querySelector("[data-num]");
@@ -38,6 +41,7 @@ export function About() {
       mm.add(
         "(max-width: 899px) and (prefers-reduced-motion: no-preference)",
         () => {
+          // This branch fades and slides each step in on smaller screens as it enters the viewport.
           gsap.set(steps, { opacity: 1 });
           steps.forEach((step) => {
             gsap.fromTo(
@@ -63,6 +67,7 @@ export function About() {
         "(min-width: 900px) and (prefers-reduced-motion: no-preference)",
         () => {
           function applyActive(index: number) {
+            // This helper highlights the active step and dims the other steps and dots on desktop.
             activeRef.current = index;
             setActiveIndex(index);
 
@@ -120,6 +125,7 @@ export function About() {
           applyActive(0);
 
           steps.forEach((step, index) => {
+            // This scroll trigger updates the active desktop step as the user moves through the timeline.
             ScrollTrigger.create({
               trigger: step,
               start: "top 50%",
@@ -137,6 +143,7 @@ export function About() {
   );
 
   function scrollToStep(index: number) {
+    // This click handler scrolls the page to the chosen process step when a side dot is pressed.
     const el = stepsRef.current[index];
     if (!el) return;
     const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.35;

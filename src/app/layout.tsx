@@ -34,6 +34,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // This layout wraps every page with global fonts, theme setup, cursors, footer, and shared UI helpers.
   return (
     <html
       lang="en"

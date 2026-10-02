@@ -18,6 +18,7 @@ type Demo = {
 };
 
 function useInViewOnce(threshold = 0.35) {
+  // This hook turns on a demo once it scrolls into view for the first time.
   const ref = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(false);
   useEffect(() => {
@@ -39,6 +40,7 @@ function useInViewOnce(threshold = 0.35) {
 }
 
 function MaskedWordReveal({ replayKey }: { replayKey: number }) {
+  // This demo animates words upward through a mask each time the replay key changes.
   const words = ["Build", "with", "clarity"];
   const [on, setOn] = useState(false);
   useEffect(() => {
@@ -63,6 +65,7 @@ function MaskedWordReveal({ replayKey }: { replayKey: number }) {
 }
 
 function TextSwapRotator({ replayKey }: { replayKey: number }) {
+  // This demo rotates through a list of words on a timer to show a text-swap effect.
   const words = ["systems", "products", "experiences", "interfaces"];
   const [i, setI] = useState(0);
   useEffect(() => {
@@ -81,6 +84,7 @@ function TextSwapRotator({ replayKey }: { replayKey: number }) {
 }
 
 function FontWeightMorph({ replayKey }: { replayKey: number }) {
+  // This demo shows a font-weight animation example that replays when the key changes.
   return (
     <p key={replayKey} className="lab-demo-text lab-weight-morph is-on">
       Soft → Strong
@@ -89,6 +93,7 @@ function FontWeightMorph({ replayKey }: { replayKey: number }) {
 }
 
 function KineticType({ replayKey }: { replayKey: number }) {
+  // This demo shows letters entering with a staggered kinetic animation.
   const letters = "KINETIC".split("");
   return (
     <p key={replayKey} className="lab-demo-text lab-kinetic is-on">
@@ -102,6 +107,7 @@ function KineticType({ replayKey }: { replayKey: number }) {
 }
 
 function ImageRevealHover() {
+  // This demo shows a hover effect that reveals the image area when the card is hovered.
   return (
     <div className="lab-img-reveal">
       <div className="lab-img-reveal-media" />
@@ -111,8 +117,10 @@ function ImageRevealHover() {
 }
 
 function MagneticButton() {
+  // This demo creates a magnetic hover effect that pulls the button toward the cursor.
   const ref = useRef<HTMLButtonElement>(null);
   const onMove = (e: MouseEvent<HTMLButtonElement>) => {
+    // This mouse handler shifts the button slightly toward the cursor position.
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -121,6 +129,7 @@ function MagneticButton() {
     el.style.transform = `translate(${x * 0.28}px, ${y * 0.28}px)`;
   };
   const onLeave = () => {
+    // This mouse-leave handler resets the button back to its normal position.
     if (ref.current) ref.current.style.transform = "translate(0,0)";
   };
   return (
@@ -137,6 +146,7 @@ function MagneticButton() {
 }
 
 function SplitColorCover() {
+  // This demo shows a hover cover effect on a link without navigating away.
   return (
     <a href="#lab" className="lab-split-cover" onClick={(e) => e.preventDefault()}>
       <span className="lab-split-cover-text">Slide Cover</span>
@@ -146,6 +156,7 @@ function SplitColorCover() {
 }
 
 function UnderlineDrawIn({ replayKey }: { replayKey: number }) {
+  // This demo redraws an underline animation under one word whenever replay is triggered.
   const [on, setOn] = useState(false);
   useEffect(() => {
     setOn(false);
@@ -164,6 +175,7 @@ function UnderlineDrawIn({ replayKey }: { replayKey: number }) {
 }
 
 function GradientScrollFill() {
+  // This demo fills the text with color once it enters the viewport.
   const { ref, on } = useInViewOnce(0.4);
   return (
     <p
@@ -176,8 +188,10 @@ function GradientScrollFill() {
 }
 
 function TextParallax() {
+  // This demo moves the text up and down on scroll to create a parallax effect.
   const ref = useRef<HTMLParagraphElement>(null);
   useEffect(() => {
+    // This effect listens to scrolling and updates the text position based on its screen offset.
     const el = ref.current;
     if (!el) return;
     const onScroll = () => {
@@ -197,6 +211,7 @@ function TextParallax() {
 }
 
 function InfiniteMarquee() {
+  // This demo shows a continuously scrolling marquee line of repeated text.
   return (
     <div className="lab-marquee" aria-hidden>
       <div className="lab-marquee-track">
@@ -210,6 +225,7 @@ function InfiniteMarquee() {
 }
 
 function StaggeredReveal({ replayKey }: { replayKey: number }) {
+  // This demo reveals a list of items one after another when replay is triggered.
   const items = ["Listen", "Design", "Build", "Ship"];
   const [on, setOn] = useState(false);
   useEffect(() => {
@@ -316,6 +332,7 @@ const DEMOS: Demo[] = [
 ];
 
 function DemoCard({ demo }: { demo: Demo }) {
+  // This component renders one demo card and lets the user replay that demo animation.
   const [replayKey, setReplayKey] = useState(0);
   const replay = useCallback(() => setReplayKey((k) => k + 1), []);
 
@@ -335,6 +352,7 @@ function DemoCard({ demo }: { demo: Demo }) {
 }
 
 export default function AnimationLabPage() {
+  // This page lists the animation demos and lets the user filter them by category.
   const categories = ["All", "Typography", "Interactive", "Scroll"];
   const [filter, setFilter] = useState("All");
   const list =

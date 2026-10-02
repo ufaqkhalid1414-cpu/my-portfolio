@@ -18,6 +18,7 @@ export function useStaggerReveal(
   selector: string,
   options: Options = {}
 ) {
+  // This hook reveals matching items one after another as they scroll into view.
   const {
     y = 40,
     stagger = 0.1,
@@ -28,6 +29,7 @@ export function useStaggerReveal(
 
   useGSAP(
     () => {
+      // This animation setup finds the target items and applies the staggered reveal behavior.
       const root = scope.current;
       if (!root) return;
       const items = gsap.utils.toArray<HTMLElement>(
@@ -38,6 +40,7 @@ export function useStaggerReveal(
       const mm = gsap.matchMedia();
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
+        // This branch shows all items immediately when reduced motion is preferred.
         gsap.set(items, { clearProps: "transform,opacity", opacity: 1, y: 0 });
       });
 
@@ -47,6 +50,7 @@ export function useStaggerReveal(
           isMobile: "(max-width: 767px) and (prefers-reduced-motion: no-preference)",
         },
         (ctx) => {
+          // This branch runs the staggered reveal and optional hide-on-scroll-back behavior.
           const isMobile = !!ctx.conditions?.isMobile;
           const fromY = isMobile ? Math.min(y, 24) : y;
 

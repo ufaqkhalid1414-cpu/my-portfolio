@@ -17,7 +17,9 @@ export function SectionLink({
   className = "",
   ...rest
 }: Props) {
+  // This component renders a link that smooth-scrolls to a section instead of doing a full page jump.
   function onClick(e: MouseEvent<HTMLAnchorElement>) {
+    // This click handler scrolls to the target section and updates the URL hash in place.
     e.preventDefault();
     scrollToSection(section);
     if (typeof history !== "undefined") {

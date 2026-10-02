@@ -6,12 +6,15 @@ import { refreshScrollTriggers } from "@/lib/gsap";
 
 /** Refresh ScrollTrigger after fonts/images and on every route change. */
 export function GsapRefresh() {
+  // This helper component refreshes GSAP scroll measurements after route, font, and image changes.
   const pathname = usePathname();
 
   useEffect(() => {
+    // This effect waits for late-loading assets and then refreshes all scroll triggers a few times safely.
     let cancelled = false;
 
     const refresh = () => {
+      // This helper runs a guarded GSAP refresh only while the component is still active.
       if (!cancelled) refreshScrollTriggers();
     };
 

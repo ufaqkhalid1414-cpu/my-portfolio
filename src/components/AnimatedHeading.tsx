@@ -37,6 +37,7 @@ type Props = {
 };
 
 function textFromChildren(children: ReactNode): string {
+  // This helper pulls plain text out of nested React children so the heading can be animated word by word.
   return Children.toArray(children)
     .map((child) => {
       if (typeof child === "string" || typeof child === "number") {
@@ -53,6 +54,7 @@ function textFromChildren(children: ReactNode): string {
 }
 
 function prefersReducedMotion(): boolean {
+  // This helper checks whether the user prefers less motion for accessibility.
   if (typeof window === "undefined") return false;
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
@@ -63,6 +65,7 @@ export function AnimatedHeading({
   underlineWord,
   className = "",
 }: Props) {
+  // This component shows animated section titles with mask, fade, or underline reveal styles.
   const resolved = variant ?? ANIMATED_HEADING_VARIANT;
   const fullText = useMemo(() => textFromChildren(children), [children]);
   const words = useMemo(
@@ -75,6 +78,7 @@ export function AnimatedHeading({
   const uid = useId();
 
   useEffect(() => {
+    // This effect keeps the component in sync with the user's reduced-motion setting.
     setReduceMotion(prefersReducedMotion());
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onChange = () => setReduceMotion(mq.matches);
@@ -83,6 +87,7 @@ export function AnimatedHeading({
   }, []);
 
   useEffect(() => {
+    // This effect waits until the heading scrolls into view before turning the animation on.
     if (resolved === "off" || reduceMotion) {
       setVisible(true);
       return;
@@ -92,6 +97,7 @@ export function AnimatedHeading({
 
     const io = new IntersectionObserver(
       ([entry]) => {
+        // This observer callback marks the heading visible once it reaches the viewport.
         if (entry?.isIntersecting) {
           setVisible(true);
           io.disconnect();

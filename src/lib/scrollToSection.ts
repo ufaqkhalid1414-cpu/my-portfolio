@@ -3,6 +3,7 @@
 export const NAV_SCROLL_OFFSET = 92;
 
 export function getSectionScrollTop(id: string): number | null {
+  // This helper calculates the scroll position so a section title lands neatly below the sticky navbar.
   if (typeof window === "undefined") return null;
   if (id === "home") return 0;
 
@@ -29,6 +30,7 @@ export function scrollToSection(
   id: string,
   behavior: ScrollBehavior = "smooth"
 ): boolean {
+  // This function smooth-scrolls to a section and fixes the final position after the motion settles.
   if (typeof window === "undefined") return false;
 
   if (id === "home") {
@@ -47,6 +49,7 @@ export function scrollToSection(
   window.scrollTo({ top, behavior });
 
   const settle = () => {
+    // This helper makes a final correction so the section heading is aligned after scrolling ends.
     const corrected = getSectionScrollTop(id);
     if (corrected != null && Math.abs(window.scrollY - corrected) > 3) {
       window.scrollTo({ top: corrected, behavior: "auto" });
@@ -56,6 +59,7 @@ export function scrollToSection(
 
   if (behavior === "smooth") {
     const onEnd = () => {
+      // This handler runs the final position correction when the smooth scroll completes.
       window.removeEventListener("scrollend", onEnd);
       settle();
     };
